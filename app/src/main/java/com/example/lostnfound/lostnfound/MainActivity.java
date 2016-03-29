@@ -22,11 +22,24 @@ public class  MainActivity extends Activity {
 
                                        @Override
                                        public void onClick(View v) {
-                                           Intent post = new Intent(MainActivity.this,postFind.class);
+                                           Intent post = new Intent(MainActivity.this, postFind.class);
                                            startActivity(post);
                                        }
                                    }
 
         );
+        Button button3 = (Button) findViewById(R.id.button3);
+        button3.setOnClickListener(new View.OnClickListener() {
+
+                                       @Override
+                                       public void onClick(View v) {
+                                           Intent post = new Intent(MainActivity.this,Browse.class);
+                                           startActivity(post);
+                                       }
+                                   }
+
+        );
+
+
     }
 }
