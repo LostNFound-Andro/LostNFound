@@ -64,8 +64,8 @@ public class  postFind extends Activity {
     public void postFields(View v){
 
         final String title = txtTitle.getText().toString();
-        final String desc = txtTitle.getText().toString();
-        final String loc = txtTitle.getText().toString();
+        final String desc = txtDesc.getText().toString();
+        final String loc = txtLoc.getText().toString();
         final String time = "time0";
         final String date = "date0";
         final String email ="emailejsljf";
@@ -98,7 +98,7 @@ public class  postFind extends Activity {
 
                     ContentValues params = new ContentValues();
 
-                    params.put("title", time);
+                    params.put("title", title);
                     params.put("desc", desc);
                     params.put("loc", loc);
                     params.put("time", time);
