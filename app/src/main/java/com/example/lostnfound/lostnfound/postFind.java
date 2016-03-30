@@ -68,7 +68,7 @@ public class  postFind extends Activity {
         final String loc = txtLoc.getText().toString();
         final String time = "time0";
         final String date = "date0";
-        final String email ="emailejsljf";
+        final String email ="testemail@nitc.ac.in";
         final String cat = getCategory();
 
 
