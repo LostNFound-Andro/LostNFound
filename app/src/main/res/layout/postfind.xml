@@ -10,7 +10,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText4"
+        android:id="@+id/txtTitle"
         android:layout_gravity="center_horizontal"
         android:text="Title"
         android:textSize="25dp" />
@@ -18,14 +18,14 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText5"
+        android:id="@+id/txtDesc"
         android:layout_gravity="center_horizontal"
         android:text="Short description" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText7"
+        android:id="@+id/txtLoc"
         android:layout_gravity="center_horizontal"
         android:text="Location" />
 
@@ -45,24 +45,42 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:text="Calculator"
-        android:id="@+id/checkBox3"
-        android:layout_gravity="center_horizontal"
+        android:id="@+id/cbCalc"
         android:checked="false" />
 
     <CheckBox
         android:layout_width="287dp"
         android:layout_height="wrap_content"
-        android:text="Pen"
-        android:id="@+id/checkBox2"
-        android:layout_gravity="center_horizontal"
+        android:text="Money"
+        android:id="@+id/cbMoney"
         android:checked="false" />
 
     <CheckBox
         android:layout_width="287dp"
         android:layout_height="wrap_content"
-        android:text="Book"
-        android:id="@+id/checkBox"
-        android:layout_gravity="center_horizontal"
+        android:text="Accessories"
+        android:id="@+id/cbAccess"
+        android:checked="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone"
+        android:id="@+id/cbPhone"
+        android:checked="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wallet"
+        android:id="@+id/cbWallet"
+        android:checked="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Other"
+        android:id="@+id/cbOther"
         android:checked="false" />
 
     <Button
@@ -70,7 +88,8 @@
         android:layout_height="wrap_content"
         android:text="Submit Post"
         android:id="@+id/button6"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:onClick="postFields" />
 
 </LinearLayout>
 </ScrollView>
