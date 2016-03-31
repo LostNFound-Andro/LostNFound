@@ -61,20 +61,6 @@ public class  Browse extends Activity {
             conn.setDoInput(true);
             conn.setDoOutput(true);
 
-            ContentValues params = new ContentValues();
-
-            params.put("user", "abc");
-            params.put("pass", "def");
-            params.put("email", "abc@gmail.com");
-
-            OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(
-                    new OutputStreamWriter(os, "UTF-8"));
-            writer.write(getQuery(params));
-            writer.flush();
-            writer.close();
-            os.close();
-
             DataInputStream dis = new DataInputStream(conn.getInputStream());
             StringBuilder stringBuilder = new StringBuilder();
             String line;
