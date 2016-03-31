@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedWriter;
@@ -30,6 +31,7 @@ public class  Browse extends Activity {
 
     String postAddress = "http://192.168.40.99/ahamed_b130112cs/se/getpost.php";
     TextView tv;
+    TextView jsonParsedOutput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class  Browse extends Activity {
         setContentView(R.layout.browse);
 
         tv = (TextView) findViewById(R.id.tv);
+        jsonParsedOutput = (TextView) findViewById(R.id.textView4);
 
         new AsyncTask<Void, Void, Void>(){
 
@@ -72,11 +75,31 @@ public class  Browse extends Activity {
             }while (line != null);
 
             String output;
+            String data = "";
             output = stringBuilder.toString();
-//            JSONObject jsonObject = new JSONObject(output);
-//            JSONArray jsonArray = jsonObject.getJSONArray("");
+
+            try {
+                JSONObject jsonRootObject = new JSONObject(output);
+                JSONArray jsonArray = jsonRootObject.getJSONArray("postlist");
+                //Iterate the jsonArray and print the info of JSONObjects
+                for(int i=0; i < jsonArray.length(); i++){
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    String title = jsonObject.optString("Title").toString();
+                    String description = jsonObject.optString("Description").toString();
+                    String categoryid = jsonObject.optString("CategoryID").toString();
+                    String emailid = jsonObject.optString("EmailID").toString();
+                    String time = jsonObject.optString("Time").toString();
+                    String date = jsonObject.optString("Date").toString();
+                    String location = jsonObject.optString("Location").toString();
+
+                    data += "Post"+i+1+" : \n title= "+ title +" \n description= "+ description +" \n emailid= "+ emailid +" \n ";
+                }
+                jsonParsedOutput.setText(data);
+            } catch (JSONException e) {e.printStackTrace();}
+
 //            Log.d("Out", stringBuilder.toString());
-            tv.setText(output);
+            //tv.setText(output);
             conn.connect();
         }
         catch (Exception e){
