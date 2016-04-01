@@ -43,16 +43,25 @@ public class  Browse extends Activity {
 
         new AsyncTask<Void, Void, Void>(){
 
+            String stringdata;
+
             @Override
             protected Void doInBackground(Void... params) {
-                getPost();
+                stringdata = getPost();
                 return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                jsonParsedOutput.setText(stringdata);
             }
         }.execute();
 
     }
 
-    public void getPost() {
+    public String getPost() {
+        String data = "";
         try {
 
 
@@ -75,7 +84,6 @@ public class  Browse extends Activity {
             }while (line != null);
 
             String output;
-            String data = "";
             output = stringBuilder.toString();
 
             try {
@@ -93,18 +101,20 @@ public class  Browse extends Activity {
                     String date = jsonObject.optString("Date").toString();
                     String location = jsonObject.optString("Location").toString();
 
-                    data += "Post"+i+1+" : \n title= "+ title +" \n description= "+ description +" \n emailid= "+ emailid +" \n ";
+                    data += "\nPost"+i+" : \n title= "+ title +" \n description= "+ description +" \n emailid= "+ emailid +" \n\n ";
                 }
-                jsonParsedOutput.setText(data);
+
             } catch (JSONException e) {e.printStackTrace();}
 
 //            Log.d("Out", stringBuilder.toString());
             //tv.setText(output);
             conn.connect();
+
         }
         catch (Exception e){
             Log.e("Out",e.getMessage()); ;
         }
+        return data;
     }
 
     private String getQuery(ContentValues params) throws UnsupportedEncodingException
