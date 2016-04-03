@@ -7,6 +7,7 @@ The app provides google sign in, post found items, browse feed at the moment. Fu
 2. Once logged in the email is stored in userEmail variable which is static, which implies you can access logged in users email in any activity or fragment using MainActivity.userName variable.
 
 3. To access its layout properties from Fragment.java, use the following code:
+
     myFragmentView = inflater.inflate(R.layout.fragment_post, container, false);
 
 4. Instead of findViewById directly, use myFragmentView.findViewById (only in fragments).
