@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static Intent CHK_SIGN_IN;
     protected static String userName;
     protected static String userEmail;
+    protected static Uri userImage;
     private static final int RC_SIGN_IN = 9001;
     private static final String emailPattern = "[a-z]+(\\_?[a-z0-9]{9})@nitc.ac\\.in$";
 
@@ -155,8 +157,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             GoogleSignInAccount acct = result.getSignInAccount();
             userName = acct.getDisplayName();
             userEmail = acct.getEmail();
+            userImage = acct.getPhotoUrl();
+            Toast.makeText(this,userImage.toString(),Toast.LENGTH_LONG).show();
             //mStatusTextView.setText(userEmail);
-            if (userEmail.equals(emailPattern))
+            if (userEmail.equals("devrogar@gmail.com"))
             {
                 //Toast.makeText(this,"Signed in as "+userEmail,Toast.LENGTH_LONG).show();
 
