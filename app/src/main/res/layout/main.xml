@@ -21,4 +21,13 @@
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.07"
         android:textSize="25dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Resolve"
+        android:id="@+id/button7"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.07"
+        android:textSize="25dp" />
 </LinearLayout>
