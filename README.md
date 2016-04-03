@@ -22,6 +22,12 @@ To add a new menu item (like Profile, Feed, Post, Subscribe etc) use the res/men
 
 To add a new instance/page/activity create a new blank fragment with factory methods, call backs and create layout checked.
   - For this fragment to be triggered, create a menu item, and make necessary changes to the FeedActivity.java
+  - 
+  
+Previous Browse.java and postFind.java Activities have been migrated to FeedFragment.java and PostActivity.java respectively.
+
+MainActivity, loginActivity, signUpActivity have no useful code, hence not included any where.
+
 
 #Important
 
