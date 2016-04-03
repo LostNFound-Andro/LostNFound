@@ -2,7 +2,8 @@
 Android application for Lost and Found.
 
 The app provides google sign in, post found items, browse feed at the moment. Further changes will be updated here.
-1. The app only allows nitc email id for login.
+
+1. The app only allows nitc email id for login. User need not enter password, but has to be logged-in in his mobile using nitc-email id.
 
 2. Once logged in the email is stored in userEmail variable which is static, which implies you can access logged in users email in any activity or fragment using MainActivity.userName variable.
 
