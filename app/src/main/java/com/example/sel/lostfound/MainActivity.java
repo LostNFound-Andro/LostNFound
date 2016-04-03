@@ -158,12 +158,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             userName = acct.getDisplayName();
             userEmail = acct.getEmail();
             userImage = acct.getPhotoUrl();
-            Toast.makeText(this,userImage.toString(),Toast.LENGTH_LONG).show();
-            //mStatusTextView.setText(userEmail);
             if (userEmail.equals(emailPattern))
             {
-                //Toast.makeText(this,"Signed in as "+userEmail,Toast.LENGTH_LONG).show();
-
                 finish();
                 startActivity(new Intent(this, FeedActivity.class));
             }
