@@ -1,3 +1,5 @@
+/* This is no long necessary once Gmail login activity is working*/
+
 package com.example.lostnfound.lostnfound;
 
 import android.app.Activity;
