@@ -8,7 +8,7 @@ The app provides google sign in, post found items, browse feed at the moment. Fu
 
 3. To access its layout properties from Fragment.java, use the following code:
 
-    myFragmentView = inflater.inflate(R.layout.fragment_post, container, false);
+    myFragmentView = inflater.inflate(R.layout.fragment_post, container, false); //example
 
 4. Instead of findViewById directly, use myFragmentView.findViewById (only in fragments).
 
