@@ -1,4 +1,21 @@
 <resources>
-    <string name="app_name">LostNFound</string>
+    <string name="app_name">Lost&amp;Found</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="emailText">Enter NITC email</string>
+    <string name="proceedButton">Proceed</string>
+    <string name="title_activity_sign_in">SignInActivity</string>
+    <string name="sign_in_button">Sign in</string>
+    <string name="signed_in_fmt">Signed in</string>
+    <string name="title_activity_feed">FeedActivity</string>
     <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="signed_out">Signed out</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
