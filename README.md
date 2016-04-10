@@ -9,20 +9,24 @@ The app provides google sign in, post found items, browse feed at the moment. Fu
 
 3. User is given following menu items to browse through
 >Profile
+
 >Feed
+
 >Post
+
 >Subscribe
+
 >Help & FAQ
 
 4. User can post a lost item, as of now, and browse them through the feed.
 
-Update 10/04/2016
+####Update 10/04/2016
 
 3. User can browse the feed, which shows all the posted data. Contact button is added, to facilitate communication with the post author.
 
-#INSTRUCTIONS FOR THE TEAM (Internal Documentation)
+##INSTRUCTIONS FOR THE TEAM (Internal Documentation)
 
-##Please update your Android Studio to 2.0 to resolve any gradle conflicts.
+####Please update your Android Studio to 2.0 to resolve any gradle conflicts.
 
 Once logged in the email is stored in userEmail variable which is static, which implies you can access logged in users email in any activity or fragment using 
 > MainActivity.userName variable.
