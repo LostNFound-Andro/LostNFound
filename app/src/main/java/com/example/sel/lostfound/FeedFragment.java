@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -18,6 +19,8 @@ import org.json.JSONObject;
 import java.io.DataInputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Rohit G on 4/2/2016.
@@ -37,6 +40,10 @@ public class FeedFragment extends Fragment {
     String postAddress = "http://52.38.30.3/getpost.php";
     TextView itemListText;
     TextView jsonParsedOutput;
+    PostAdapter postAdapter;
+    ListView listView;
+    //ArrayList<Posts> posts;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -82,63 +89,65 @@ public class FeedFragment extends Fragment {
         }
 
 
+
     }
 
-    private String getPost() {
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
         String data = "";
-        try {
+
+        listView = (ListView) myFragmentView.findViewById(R.id.listView);
 
 
-            URL url = new URL(postAddress);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(10000);
-            conn.setConnectTimeout(15000);
-            conn.setRequestMethod("POST");
-            conn.setDoInput(true);
-            conn.setDoOutput(true);
+        ScriptRunner run = new ScriptRunner(new ScriptRunner.ScriptFinishListener() {
+            @Override
+            public void finish(String result, int resultCode) {
+                if(resultCode==ScriptRunner.SUCCESS){
+                    //parse json
+                    Log.d("Yup","Came");
+                    String data = "";
 
-            DataInputStream dis = new DataInputStream(conn.getInputStream());
-            StringBuilder stringBuilder = new StringBuilder();
-            String line;
+                    List<Posts> p = new ArrayList<Posts>();
+                    try {
+                        JSONObject jsonRootObject = new JSONObject(result);
+                        JSONArray jsonArray = jsonRootObject.getJSONArray("postlist");
+                        //Iterate the jsonArray and print the info of JSONObjects
+                        for(int i=0; i < jsonArray.length(); i++){
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-            do{
-                line = dis.readLine();
-                stringBuilder.append(line);
+                            String title = jsonObject.optString("title").toString();
+                            String description = jsonObject.optString("description").toString();
+                            String categoryid = jsonObject.optString("cid").toString();
+                            String emailid = jsonObject.optString("email").toString();
+                            String time = jsonObject.optString("time").toString();
+                            String date = jsonObject.optString("date").toString();
+                            String location = jsonObject.optString("location").toString();
 
-            }while (line != null);
+                            Posts posts = new Posts(title,categoryid,date,description,emailid,location,time);
+                            p.add(posts);
 
-            String output;
-            output = stringBuilder.toString();
 
-            try {
-                JSONObject jsonRootObject = new JSONObject(output);
-                JSONArray jsonArray = jsonRootObject.getJSONArray("postlist");
-                //Iterate the jsonArray and print the info of JSONObjects
-                for(int i=0; i < jsonArray.length(); i++){
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            data += "\nPost"+i+" : \n title= "+ title +" \n description= "+ description +" \n emailid= "+ emailid +" \n\n ";
+                            Log.e("c",data);
+                        }
+                        Log.e("List size",""+p.size());
+                        postAdapter = new PostAdapter(getActivity(),R.layout.row_layout,p);
+                        listView.setAdapter(postAdapter);
+                        listView.invalidate();
 
-                    String title = jsonObject.optString("title").toString();
-                    String description = jsonObject.optString("description").toString();
-                    String categoryid = jsonObject.optString("cid").toString();
-                    String emailid = jsonObject.optString("email").toString();
-                    String time = jsonObject.optString("time").toString();
-                    String date = jsonObject.optString("date").toString();
-                    String location = jsonObject.optString("location").toString();
 
-                    data += "\nPost"+i+" : \n title= "+ title +" \n description= "+ description +" \n emailid= "+ emailid +" \n\n ";
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
+            }
+        });
 
-            } catch (JSONException e) {e.printStackTrace();}
+        run.execute(postAddress);
 
-//            Log.d("Out", stringBuilder.toString());
-            //tv.setText(output);
-            conn.connect();
 
-        }
-        catch (Exception e){
-            Log.e("Out", e.getMessage()); ;
-        }
-        return data;
     }
 
 
@@ -146,23 +155,8 @@ public class FeedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        new AsyncTask<Void, Void, Void>(){
 
-            String stringdata;
 
-            @Override
-            protected Void doInBackground(Void... params) {
-                stringdata = getPost();
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                jsonParsedOutput.setText(stringdata);
-            }
-        }.execute();
-        // Inflate the layout for this fragment
         myFragmentView = inflater.inflate(R.layout.fragment_feed, container, false);
         itemListText = (TextView) myFragmentView.findViewById(R.id.itemListText);
         jsonParsedOutput = (TextView) myFragmentView.findViewById(R.id.loadingText);
