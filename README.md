@@ -7,20 +7,21 @@ The app provides google sign in, post found items, browse feed at the moment. Fu
 
 2. Once logged in the email is stored in userEmail variable which is static, which implies you can access logged in users email in any activity or fragment using MainActivity.userName variable.
 
-3. To access its layout properties from Fragment.java, use the following code:
+3. Instead of findViewById directly, use myFragmentView.findViewById (only in fragments).
 
-    > myFragmentView = inflater.inflate(R.layout.fragment_post, container, false); //example
-
-4. Instead of findViewById directly, use myFragmentView.findViewById (only in fragments).
-
-5. To use the context in any Fragment, use getActivity(); instead of this or Context context.
+4. To use the context in any Fragment, use getActivity(); instead of this or Context context.
 
 #INSTRUCTION FOR THE TEAM
+
+##Please update your Android Studio to 2.0 to resolve any gradle conflicts.
 
 To add any functionality, add it in the existing fragments.
 
 To add a new menu item (like Profile, Feed, Post, Subscribe etc) use the 
 > res/menu/activity_feed_drawer.xml
+
+To access its layout properties from Fragment.java, use the following code:
+> myFragmentView = inflater.inflate(R.layout.fragment_post, container, false);               //example
 
 To add a new instance/page/activity create a new blank fragment with factory methods, call backs and create layout checked.
   - For this fragment to be triggered, create a menu item, and make necessary changes to the FeedActivity.java
