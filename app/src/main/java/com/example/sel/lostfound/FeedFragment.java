@@ -135,6 +135,7 @@ public class FeedFragment extends Fragment {
                         Log.e("List size",""+p.size());
                         postAdapter = new PostAdapter(getActivity(),R.layout.row_layout,p);
                         listView.setAdapter(postAdapter);
+                        jsonParsedOutput.setVisibility(View.GONE);
                         listView.invalidate();
 
 
