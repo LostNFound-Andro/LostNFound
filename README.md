@@ -5,15 +5,27 @@ The app provides google sign in, post found items, browse feed at the moment. Fu
 
 1. The app only allows nitc email id for login. User need not enter password, but has to be logged-in in his mobile using nitc-email id.
 
-2. Once logged in the email is stored in userEmail variable which is static, which implies you can access logged in users email in any activity or fragment using MainActivity.userName variable.
+2. A display picture, if there is any attached to the nitc gmail account, is shown in the navigation drawer.
 
-3. Instead of findViewById directly, use myFragmentView.findViewById (only in fragments).
+3. User is given following menu items to browse through
+>Profile
+>Feed
+>Post
+>Subscribe
+>Help & FAQ
 
-4. To use the context in any Fragment, use getActivity(); instead of this or Context context.
+4. User can post a lost item, as of now, and browse them through the feed.
 
-#INSTRUCTION FOR THE TEAM
+Update 10/04/2016
+
+3. User can browse the feed, which shows all the posted data. Contact button is added, to facilitate communication with the post author.
+
+#INSTRUCTIONS FOR THE TEAM (Internal Documentation)
 
 ##Please update your Android Studio to 2.0 to resolve any gradle conflicts.
+
+Once logged in the email is stored in userEmail variable which is static, which implies you can access logged in users email in any activity or fragment using 
+> MainActivity.userName variable.
 
 To add any functionality, add it in the existing fragments.
 
@@ -22,6 +34,10 @@ To add a new menu item (like Profile, Feed, Post, Subscribe etc) use the
 
 To access its layout properties from Fragment.java, use the following code:
 > myFragmentView = inflater.inflate(R.layout.fragment_post, container, false);               //example
+
+Instead of findViewById directly, use myFragmentView.findViewById (only in fragments).
+
+To use the context in any Fragment, use getActivity(); instead of this or Context context.
 
 To add a new instance/page/activity create a new blank fragment with factory methods, call backs and create layout checked.
   - For this fragment to be triggered, create a menu item, and make necessary changes to the FeedActivity.java
