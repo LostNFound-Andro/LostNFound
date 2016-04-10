@@ -8,6 +8,7 @@ The app provides google sign in, post found items, browse feed at the moment. Fu
 2. A display picture, if there is any attached to the nitc gmail account, is shown in the navigation drawer.
 
 3. User is given following menu items to browse through
+
 >Profile
 
 >Feed
