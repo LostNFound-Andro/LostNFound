@@ -9,21 +9,23 @@ The app provides google sign in, post found items, browse feed at the moment. Fu
 
 3. User is given following menu items to browse through
 
->Profile
+  >Profile
 
->Feed
+  >Feed
 
->Post
+  >Post
 
->Subscribe
+  >Subscribe
 
->Help & FAQ
-
+  >Help & FAQ
+  
 4. User can post a lost item, as of now, and browse them through the feed.
 
-####Update 10/04/2016
+5. Sign out option is available, where user can chose to logout completely and login as a different user.
 
-3. User can browse the feed, which shows all the posted data. Contact button is added, to facilitate communication with the post author.
+#####Update 10/04/2016
+
+1. User can browse the feed, which shows all the posted data. Contact button is added, to facilitate communication with the post author.
 
 ##INSTRUCTIONS FOR THE TEAM (Internal Documentation)
 
