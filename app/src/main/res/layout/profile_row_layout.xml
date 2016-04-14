@@ -22,7 +22,9 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_margin="5dp" />
+        android:layout_margin="5dp"
+        android:textStyle="italic"
+        android:textSize="18dp" />
 
     <TextView
         android:layout_width="200dp"
@@ -95,9 +97,11 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Category:"
-        android:id="@+id/textView2"
+        android:id="@+id/catLabel"
         android:layout_alignBottom="@+id/tx_category"
         android:layout_toLeftOf="@+id/tx_category"
-        android:layout_toStartOf="@+id/tx_category" />
+        android:layout_toStartOf="@+id/tx_category"
+        android:textStyle="bold|italic"
+        android:textSize="18dp" />
 
 </RelativeLayout>

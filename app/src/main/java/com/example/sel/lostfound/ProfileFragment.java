@@ -94,7 +94,7 @@ public class ProfileFragment extends Fragment {
         String data = "";
 
         listView = (ListView) myFragmentView.findViewById(R.id.listView);
-
+        final TextView no_user_posts = (TextView) myFragmentView.findViewById(R.id.noPostText);
 
         ScriptRunner run = new ScriptRunner(new ScriptRunner.ScriptFinishListener() {
             @Override
@@ -127,9 +127,13 @@ public class ProfileFragment extends Fragment {
 
                         }
                         Log.e("List size",""+p.size());
+                        if(p.size()!=0){
                         userPostAdapter = new UserPostAdapter(getActivity(),R.layout.profile_row_layout,p);
                         listView.setAdapter(userPostAdapter);
-                        listView.invalidate();
+                        listView.invalidate();}else{
+                            listView.setVisibility(View.GONE);
+                            no_user_posts.setVisibility(View.VISIBLE);
+                        }
 
 
                     } catch (JSONException e) {
