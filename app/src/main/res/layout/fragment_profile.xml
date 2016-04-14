@@ -1,13 +1,13 @@
 <LinearLayout android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android" android:background="#ffffff">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="240dp"
             android:layout_gravity="center_horizontal"
-            android:background="#d5d3d4">
+            android:background="#3f51b5">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 xmlns:app="http://schemas.android.com/apk/res-auto"

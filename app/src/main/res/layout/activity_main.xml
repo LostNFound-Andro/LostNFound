@@ -10,7 +10,7 @@
     tools:context="com.example.sel.lostfound.MainActivity"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:weightSum="1">
+    android:weightSum="1" android:background="#ffffff">
 
     <EditText
         android:layout_width="match_parent"
