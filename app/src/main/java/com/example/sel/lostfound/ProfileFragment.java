@@ -1,12 +1,27 @@
 package com.example.sel.lostfound;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Rohit G on 4/2/2016.
@@ -22,6 +37,9 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class ProfileFragment extends Fragment {
+	String postAddress = "http://52.38.30.3/getprofilepost.php";
+    PostAdapter postAdapter;
+    ListView listView;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,6 +48,9 @@ public class ProfileFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+	
+	private View myFragmentView;
+    private de.hdodenhof.circleimageview.CircleImageView user_image;
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,13 +86,83 @@ public class ProfileFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+	
+	@Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        String data = "";
+
+        listView = (ListView) myFragmentView.findViewById(R.id.listView);
+
+
+        ScriptRunner run = new ScriptRunner(new ScriptRunner.ScriptFinishListener() {
+            @Override
+            public void finish(String result, int resultCode) {
+                if(resultCode==ScriptRunner.SUCCESS){
+                    //parse json
+                    Log.d("Yup","Came");
+                    String data = "";
+
+                    List<Posts> p = new ArrayList<Posts>();
+                    try {
+                        JSONObject jsonRootObject = new JSONObject(result);
+                        JSONArray jsonArray = jsonRootObject.getJSONArray("postlist");
+                        //Iterate the jsonArray and print the info of JSONObjects
+                        for(int i=0; i < jsonArray.length(); i++){
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                            String title = jsonObject.optString("title").toString();
+                            String description = jsonObject.optString("description").toString();
+                            String categoryid = jsonObject.optString("cid").toString();
+                            String emailid = jsonObject.optString("email").toString();
+                            String time = jsonObject.optString("time").toString();
+                            String date = jsonObject.optString("date").toString();
+                            String location = jsonObject.optString("location").toString();
+
+                            Posts posts = new Posts(title,categoryid,date,description,emailid,location,time);
+                            p.add(posts);
+
+
+                            data += "\nPost"+i+" : \n title= "+ title +" \n description= "+ description +" \n emailid= "+ emailid +" \n\n ";
+                            Log.e("c",data);
+                        }
+                        Log.e("List size",""+p.size());
+                        postAdapter = new PostAdapter(getActivity(),R.layout.row_layout,p);
+                        listView.setAdapter(postAdapter);
+                        listView.invalidate();
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        run.execute(postAddress);
+
+
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        myFragmentView = inflater.inflate(R.layout.fragment_profile, container, false);
+        user_image = (de.hdodenhof.circleimageview.CircleImageView) myFragmentView.findViewById(R.id.profileImage);
+        TextView user_name = (TextView) myFragmentView.findViewById(R.id.profileNameText);
+        TextView user_email = (TextView) myFragmentView.findViewById(R.id.profileEmailText);
+        user_name.setText(MainActivity.userName);
+        user_email.setText(MainActivity.userEmail);
+        if(MainActivity.userImage != null) {
+            new DownloadImageTask(user_image)
+                    .execute(MainActivity.userImage.toString());
+        }
+        return myFragmentView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -112,5 +203,31 @@ public class ProfileFragment extends Fragment {
         // TODO: Update argument type and name
         public void onProfileFragmentInteraction(String string);
         void onFragmentInteraction(Uri uri);
+    }
+	
+	    private class DownloadImageTask extends AsyncTask<String,Void,Bitmap> {
+        ImageView bmImage;
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap userDp = null;
+            try {
+                InputStream IS = new java.net.URL(urldisplay).openStream();
+                userDp = BitmapFactory.decodeStream(IS);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return userDp;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
     }
 }
