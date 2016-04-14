@@ -59,8 +59,8 @@ MainActivity, loginActivity, signUpActivity have no useful code, hence not inclu
 This is the new default branch. To make any changes, create a new branch and do not pull or merge unless discussed.
 
 #Note
-1) Implement classes as in the class diagram
-2) Database should be as in the ER diagram
-3) All the usecases in the usecase diagram should be implemented.
-4) Better user interface
-5) Internal and External documentation
+1. Implement classes as in the class diagram
+2. Database should be as in the ER diagram
+3. All the usecases in the usecase diagram should be implemented.
+4. Better user interface
+5. Internal and External documentation
