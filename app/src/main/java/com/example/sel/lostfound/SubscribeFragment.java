@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -54,12 +55,14 @@ public class SubscribeFragment extends Fragment {
 
 
     String postAddress = "http://52.38.30.3/getallcat.php";
+    String postAddress2 = "http://52.38.30.3/getsubscribedcat.php";
     private Spinner mySpinner;
 
     private SpinnerAdapter adapter;
     private View myFragmentView;
     private String catID;
-
+    private SubscribeAdapter subscribeAdapter;
+    private ListView listView;
     Button subscribe_button;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -166,6 +169,52 @@ public class SubscribeFragment extends Fragment {
         });
 
         run.execute(postAddress);
+
+        listView = (ListView) myFragmentView.findViewById(R.id.listView2);
+
+
+        ScriptRunner run2 = new ScriptRunner(new ScriptRunner.ScriptFinishListener() {
+            @Override
+            public void finish(String result, int resultCode) {
+                if(resultCode==ScriptRunner.SUCCESS){
+                    //parse json
+                    Log.d("Yup","Came");
+
+
+                    List<Category> c = new ArrayList<Category>();
+                    try {
+                        JSONObject jsonRootObject = new JSONObject(result);
+                        JSONArray jsonArray = jsonRootObject.getJSONArray("category_list");
+                        //Iterate the jsonArray and print the info of JSONObjects
+                        for(int i=0; i < jsonArray.length(); i++){
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                            String categoryName = jsonObject.optString("CategoryName").toString();
+                            String cid = jsonObject.optString("CategoryID").toString();
+
+                            Category category = new Category(categoryName,cid);
+                            c.add(category);
+
+
+                        }
+                        Log.e("List size",""+c.size());
+                        subscribeAdapter = new SubscribeAdapter(getActivity(),R.layout.row_layout2,c);
+                        listView.setAdapter(subscribeAdapter);
+
+                        listView.invalidate();
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        run2.execute(postAddress2);
+
+
+
     }
 
     @Override

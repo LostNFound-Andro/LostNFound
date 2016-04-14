@@ -3,12 +3,19 @@ package com.example.sel.lostfound;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Map;
 
+import android.content.ContentValues;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -39,6 +46,18 @@ public class ScriptRunner extends AsyncTask<String, Void, String> {
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
 
+			String email = MainActivity.userEmail;
+			OutputStream OS = conn.getOutputStream();
+			BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS, "UTF-8"));
+			ContentValues data = new ContentValues();
+
+			data.put("email", email);
+			Log.d("c", email);
+			bufferedWriter.write(getQuery(data));
+			bufferedWriter.flush();
+			bufferedWriter.close();
+			OS.close();
+
 			DataInputStream dis = new DataInputStream(conn.getInputStream());
 			StringBuilder stringBuilder = new StringBuilder();
 			String line;
@@ -60,6 +79,29 @@ public class ScriptRunner extends AsyncTask<String, Void, String> {
 		isDone = true;
 		return objectString;
 	}
+
+	private String getQuery(ContentValues params) throws UnsupportedEncodingException
+	{
+		StringBuilder result = new StringBuilder();
+		boolean first = true;
+
+		for (Map.Entry<String, Object> entry : params.valueSet())
+		{
+			if (first)
+				first = false;
+			else
+				result.append("&");
+
+			result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+			result.append("=");
+			result.append(URLEncoder.encode(entry.getValue().toString(), "UTF-8"));
+		}
+
+		return result.toString();
+	}
+
+
+
 
 	public boolean getIsDone(){
 		return isDone;
