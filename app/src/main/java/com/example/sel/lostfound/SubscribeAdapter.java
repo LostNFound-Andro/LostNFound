@@ -2,7 +2,6 @@ package com.example.sel.lostfound;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -128,6 +127,7 @@ public class SubscribeAdapter extends ArrayAdapter<Category> {
 
         return row;
     }
+    
     private String getQuery(ContentValues params) throws UnsupportedEncodingException
     {
         StringBuilder result = new StringBuilder();

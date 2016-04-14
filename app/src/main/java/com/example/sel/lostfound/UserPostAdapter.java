@@ -1,7 +1,9 @@
 package com.example.sel.lostfound;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,55 +82,70 @@ public class UserPostAdapter extends ArrayAdapter<UserPost>{
         Button resolve_button = (Button) row.findViewById(R.id.resolve_button);
         resolve_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+            new AlertDialog.Builder(context)
+                    .setTitle("Resolve post")
+                    .setMessage("Resolving confirms the issue has been solved")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
-                Toast.makeText(context,"resolving",Toast.LENGTH_LONG).show();
-                new AsyncTask<Void, Void, Void>() {
+                            Toast.makeText(context, "resolving", Toast.LENGTH_LONG).show();
+                            new AsyncTask<Void, Void, Void>() {
 
-                    @Override
-                    protected Void doInBackground(Void... params) {
-                        String email = MainActivity.userEmail;
-                        String checkUrl = "http://52.38.30.3/resolve.php";
-                        try {
-                            URL url = new URL(checkUrl);
-                            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                            httpURLConnection.setReadTimeout(10000);
-                            httpURLConnection.setConnectTimeout(15000);
-                            httpURLConnection.setRequestMethod("POST");
-                            httpURLConnection.setDoOutput(true);
-                            httpURLConnection.setDoInput(true);
-                            OutputStream OS = httpURLConnection.getOutputStream();
-                            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS, "UTF-8"));
-                            ContentValues data = new ContentValues();
-                            data.put("post_id",userPost.getPostid());
+                                @Override
+                                protected Void doInBackground(Void... params) {
+                                    String email = MainActivity.userEmail;
+                                    String checkUrl = "http://52.38.30.3/resolve.php";
+                                    try {
+                                        URL url = new URL(checkUrl);
+                                        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                                        httpURLConnection.setReadTimeout(10000);
+                                        httpURLConnection.setConnectTimeout(15000);
+                                        httpURLConnection.setRequestMethod("POST");
+                                        httpURLConnection.setDoOutput(true);
+                                        httpURLConnection.setDoInput(true);
+                                        OutputStream OS = httpURLConnection.getOutputStream();
+                                        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS, "UTF-8"));
+                                        ContentValues data = new ContentValues();
+                                        data.put("post_id", userPost.getPostid());
 
-                            bufferedWriter.write(getQuery(data));
-                            bufferedWriter.flush();
-                            bufferedWriter.close();
-                            OS.close();
+                                        bufferedWriter.write(getQuery(data));
+                                        bufferedWriter.flush();
+                                        bufferedWriter.close();
+                                        OS.close();
 
-                            InputStream IS = httpURLConnection.getInputStream();
-                            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(IS,"iso-8859-1"));
-                            String response = "";
-                            String line = "";
-                            while ((line = bufferedReader.readLine())!=null)
-                            {
-                                response+= line;
-                            }
-                            bufferedReader.close();
-                            IS.close();
-                            httpURLConnection.disconnect();
-                        } catch (MalformedURLException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                                        InputStream IS = httpURLConnection.getInputStream();
+                                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(IS, "iso-8859-1"));
+                                        String response = "";
+                                        String line = "";
+                                        while ((line = bufferedReader.readLine()) != null) {
+                                            response += line;
+                                        }
+                                        bufferedReader.close();
+                                        IS.close();
+                                        httpURLConnection.disconnect();
+                                    } catch (MalformedURLException e) {
+                                        e.printStackTrace();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                    return null;
+                                }
+                            }.execute();
+
                         }
-                        return null;
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
                     }
-                }.execute();
 
-
-            }
-        });
+            });
 
         return row;
     }
