@@ -18,10 +18,14 @@ The app provides google sign in, post found items, browse feed at the moment. Fu
   >Subscribe
 
   >Help & FAQ
-  
-4. User can post a lost item, as of now, and browse them through the feed.
 
-5. Sign out option is available, where user can chose to logout completely and login as a different user.
+4. User can subscribe/unsubscribe among the given categories.
+  
+5. User can post a lost item, as of now, and browse them through the feed provided they have subscribed the category.
+
+6. User can contact the author of the post by clicking the contact button corresponding to it, which redirects the user to his gmail compose dialog box so that the user can send an email to the author.    
+
+7. Sign out option is available, where user can chose to logout completely and login as a different user.
 
 #####Update 10/04/2016
 
