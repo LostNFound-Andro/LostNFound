@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.sel.lostfound.SubscribeFragment">
+    tools:context="com.example.sel.lostfound.SubscribeFragment" android:background="#ffffff">
 
     <!-- TODO: Update blank fragment layout -->
 
