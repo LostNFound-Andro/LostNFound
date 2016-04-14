@@ -13,9 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.sel.lostfound.dummy.SpinnerAdapter;
@@ -59,6 +59,7 @@ public class PostFragment extends Fragment {
     TextView txtTitle;
     TextView txtDesc;
     TextView txtLoc;
+    TimePicker timePicker;
 
     String postAddress = "http://52.38.30.3/getallcat.php";
     private Spinner mySpinner;
@@ -69,7 +70,7 @@ public class PostFragment extends Fragment {
 
 
 
-    private static String title,description,location;
+    private static String title,description,location,time;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -122,6 +123,8 @@ public class PostFragment extends Fragment {
         // Inflate the layout for this fragment
         myFragmentView = inflater.inflate(R.layout.fragment_post, container, false);
         postButton = (Button)myFragmentView.findViewById(R.id.postButton);
+
+
         postButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -130,6 +133,8 @@ public class PostFragment extends Fragment {
                 title = txtTitle.getText().toString();
                 description = txtDesc.getText().toString();
                 location = txtLoc.getText().toString();
+                time = timePicker.getCurrentHour()+":"+timePicker.getCurrentMinute();
+
                 new AsyncTask<Void, Void, Void>() {
 
                     @Override
@@ -150,6 +155,7 @@ public class PostFragment extends Fragment {
                             data.put("email", email);
                             data.put("title",title);
                             data.put("description",description);
+                            data.put("time",time);
                             data.put("location",location);
                             data.put("cid",catID);
                             bufferedWriter.write(getQuery(data));
@@ -184,7 +190,7 @@ public class PostFragment extends Fragment {
         txtTitle = (TextView) myFragmentView.findViewById(R.id.txtTitle);
         txtDesc = (TextView) myFragmentView.findViewById(R.id.txtDesc);
         txtLoc = (TextView) myFragmentView.findViewById(R.id.txtLoc);
-
+        timePicker = (TimePicker) myFragmentView.findViewById(R.id.timePicker);
         return myFragmentView;
     }
 
