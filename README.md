@@ -27,10 +27,6 @@ The app provides google sign in, post found items, browse feed at the moment. Fu
 
 7. Sign out option is available, where user can chose to logout completely and login as a different user.
 
-#####Update 10/04/2016
-
-1. User can browse the feed, which shows all the posted data. Contact button is added, to facilitate communication with the post author.
-
 ##INSTRUCTIONS FOR THE TEAM (Internal Documentation)
 
 ####Please update your Android Studio to 2.0 to resolve any gradle conflicts.
