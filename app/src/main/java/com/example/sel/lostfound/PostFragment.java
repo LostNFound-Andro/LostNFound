@@ -1,11 +1,13 @@
 package com.example.sel.lostfound;
 
+import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -60,6 +63,8 @@ public class PostFragment extends Fragment {
     TextView txtDesc;
     TextView txtLoc;
     TimePicker timePicker;
+    DatePicker datePicker;
+
 
     String postAddress = "http://52.38.30.3/getallcat.php";
     private Spinner mySpinner;
@@ -70,7 +75,8 @@ public class PostFragment extends Fragment {
 
 
 
-    private static String title,description,location,time;
+    private static String title,description,location,time,date;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -134,7 +140,7 @@ public class PostFragment extends Fragment {
                 description = txtDesc.getText().toString();
                 location = txtLoc.getText().toString();
                 time = timePicker.getCurrentHour()+":"+timePicker.getCurrentMinute();
-
+                date = datePicker.getDayOfMonth()+"/"+datePicker.getMonth()+"/"+datePicker.getYear();
                 new AsyncTask<Void, Void, Void>() {
 
                     @Override
@@ -156,6 +162,7 @@ public class PostFragment extends Fragment {
                             data.put("title",title);
                             data.put("description",description);
                             data.put("time",time);
+                            data.put("date",date);
                             data.put("location",location);
                             data.put("cid",catID);
                             bufferedWriter.write(getQuery(data));
@@ -191,6 +198,7 @@ public class PostFragment extends Fragment {
         txtDesc = (TextView) myFragmentView.findViewById(R.id.txtDesc);
         txtLoc = (TextView) myFragmentView.findViewById(R.id.txtLoc);
         timePicker = (TimePicker) myFragmentView.findViewById(R.id.timePicker);
+        datePicker = (DatePicker) myFragmentView.findViewById(R.id.datePicker);
         return myFragmentView;
     }
 
