@@ -44,47 +44,11 @@
         android:id="@+id/calendarView"
         android:layout_gravity="center_horizontal" />
 
-    <CheckBox
-        android:layout_width="280dp"
+    <Spinner
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Calculator"
-        android:id="@+id/cbCalc"
-        android:checked="false" />
-
-    <CheckBox
-        android:layout_width="287dp"
-        android:layout_height="wrap_content"
-        android:text="Money"
-        android:id="@+id/cbMoney"
-        android:checked="false" />
-
-    <CheckBox
-        android:layout_width="287dp"
-        android:layout_height="wrap_content"
-        android:text="Accessories"
-        android:id="@+id/cbAccess"
-        android:checked="false" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Phone"
-        android:id="@+id/cbPhone"
-        android:checked="false" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Wallet"
-        android:id="@+id/cbWallet"
-        android:checked="false" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Other"
-        android:id="@+id/cbOther"
-        android:checked="false" />
+        android:id="@+id/spinner"
+        android:layout_gravity="center_horizontal" />
 
     <Button
         android:layout_width="wrap_content"

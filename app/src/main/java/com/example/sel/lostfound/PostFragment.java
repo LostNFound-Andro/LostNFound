@@ -5,14 +5,24 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.sel.lostfound.dummy.SpinnerAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -26,6 +36,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -43,12 +55,19 @@ import java.util.Map;
  */
 public class PostFragment extends Fragment {
 
-    String postAddress = "http://52.38.30.3/addpost.php";
+
     TextView txtTitle;
     TextView txtDesc;
     TextView txtLoc;
-    CheckBox cbCalc;
-    CheckBox cbMoney;
+
+    String postAddress = "http://52.38.30.3/getallcat.php";
+    private Spinner mySpinner;
+
+    private SpinnerAdapter adapter;
+    private View myFragmentView;
+    private String catID;
+
+
 
     private static String title,description,location;
 
@@ -62,7 +81,7 @@ public class PostFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-    private View myFragmentView;
+
     Button postButton;
 
     public PostFragment() {
@@ -132,6 +151,7 @@ public class PostFragment extends Fragment {
                             data.put("title",title);
                             data.put("description",description);
                             data.put("location",location);
+                            data.put("cid",catID);
                             bufferedWriter.write(getQuery(data));
                             bufferedWriter.flush();
                             bufferedWriter.close();
@@ -164,8 +184,7 @@ public class PostFragment extends Fragment {
         txtTitle = (TextView) myFragmentView.findViewById(R.id.txtTitle);
         txtDesc = (TextView) myFragmentView.findViewById(R.id.txtDesc);
         txtLoc = (TextView) myFragmentView.findViewById(R.id.txtLoc);
-        cbCalc = (CheckBox) myFragmentView.findViewById(R.id.cbCalc);
-        cbMoney = (CheckBox) myFragmentView.findViewById(R.id.cbMoney);
+
         return myFragmentView;
     }
 
@@ -208,6 +227,67 @@ public class PostFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mySpinner = (Spinner) myFragmentView.findViewById(R.id.spinner);
+
+        ScriptRunner run = new ScriptRunner(new ScriptRunner.ScriptFinishListener() {
+            @Override
+            public void finish(String result, int resultCode) {
+                if(resultCode==ScriptRunner.SUCCESS){
+                    //parse json
+
+
+                    List<Category> c = new ArrayList<Category>();
+                    try {
+                        JSONObject jsonRootObject = new JSONObject(result);
+                        JSONArray jsonArray = jsonRootObject.getJSONArray("category_list");
+                        //Iterate the jsonArray and print the info of JSONObjects
+                        for(int i=0; i < jsonArray.length(); i++){
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                            String categoryName = jsonObject.optString("CategoryName").toString();
+                            String cid = jsonObject.optString("CategoryID").toString();
+
+                            Category category = new Category(categoryName,cid);
+                            c.add(category);
+
+                        }
+                        Log.e("List size", "" + c.size());
+
+                        adapter = new SpinnerAdapter(getActivity(), android.R.layout.simple_spinner_item,c);
+                        mySpinner.setAdapter(adapter);
+
+                        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view,
+                                                       int position, long id) {
+                                // Here you get the current item (a User object) that is selected by its position
+                                Category cat = adapter.getItem(position);
+                                // Here you can do the action you want to...
+                                catID = cat.getCid();
+                                Toast.makeText(getActivity(), "ID: " + catID + "\ncat: " + cat.getCategory(),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapter) {
+                            }
+                        });
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        run.execute(postAddress);
+
     }
 
     @Override
