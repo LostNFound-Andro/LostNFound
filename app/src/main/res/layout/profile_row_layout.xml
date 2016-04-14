@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -80,30 +80,16 @@
         android:layout_toLeftOf="@+id/contact_button"
         android:layout_toStartOf="@+id/contact_button" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="email"
-        android:id="@+id/tx_email"
-        android:layout_below="@+id/tx_location"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_toLeftOf="@+id/contact_button"
-        android:layout_toStartOf="@+id/contact_button" />
-
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="contact"
-        android:id="@+id/contact_button"
-        android:layout_alignTop="@+id/tx_location"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:text="resolve"
+        android:id="@+id/resolve_button"
+        android:layout_alignBottom="@+id/tx_location"
+        android:layout_alignRight="@+id/tx_category"
+        android:layout_alignEnd="@+id/tx_category" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

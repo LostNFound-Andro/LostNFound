@@ -38,7 +38,7 @@ import java.util.List;
  */
 public class ProfileFragment extends Fragment {
 	String postAddress = "http://52.38.30.3/getprofilepost.php";
-    PostAdapter postAdapter;
+    UserPostAdapter userPostAdapter;
     ListView listView;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -102,9 +102,9 @@ public class ProfileFragment extends Fragment {
                 if(resultCode==ScriptRunner.SUCCESS){
                     //parse json
                     Log.d("Yup","Came");
-                    String data = "";
 
-                    List<Posts> p = new ArrayList<Posts>();
+
+                    List<UserPost> p = new ArrayList<UserPost>();
                     try {
                         JSONObject jsonRootObject = new JSONObject(result);
                         JSONArray jsonArray = jsonRootObject.getJSONArray("postlist");
@@ -115,21 +115,20 @@ public class ProfileFragment extends Fragment {
                             String title = jsonObject.optString("title").toString();
                             String description = jsonObject.optString("description").toString();
                             String categoryid = jsonObject.optString("cid").toString();
-                            String emailid = jsonObject.optString("email").toString();
+                            String postid = jsonObject.optString("post_id").toString();
                             String time = jsonObject.optString("time").toString();
                             String date = jsonObject.optString("date").toString();
                             String location = jsonObject.optString("location").toString();
 
-                            Posts posts = new Posts(title,categoryid,date,description,emailid,location,time);
-                            p.add(posts);
+                            UserPost userPost = new UserPost(title,description,categoryid,postid,time,date,location);
+                            p.add(userPost);
 
 
-                            data += "\nPost"+i+" : \n title= "+ title +" \n description= "+ description +" \n emailid= "+ emailid +" \n\n ";
-                            Log.e("c",data);
+
                         }
                         Log.e("List size",""+p.size());
-                        postAdapter = new PostAdapter(getActivity(),R.layout.row_layout,p);
-                        listView.setAdapter(postAdapter);
+                        userPostAdapter = new UserPostAdapter(getActivity(),R.layout.profile_row_layout,p);
+                        listView.setAdapter(userPostAdapter);
                         listView.invalidate();
 
 

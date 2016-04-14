@@ -8,11 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import junit.framework.Test;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
