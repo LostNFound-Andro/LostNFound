@@ -1,60 +1,155 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent" android:background="#ffffff">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1"
-    tools:context="com.example.sel.lostfound.PostFragment">
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtTitle"
-        android:layout_marginTop="60dp"
-        android:layout_gravity="center_horizontal"
-        android:hint="Title"
-        android:textSize="25dp" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtDesc"
-        android:layout_gravity="center_horizontal"
-        android:hint="Short description" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtLoc"
-        android:layout_gravity="center_horizontal"
-        android:hint="Location" />
-
-    <Spinner
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/spinner" />
+        android:weightSum="1"
+        tools:context="com.example.sel.lostfound.PostFragment">
 
-    <TimePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/timePicker"
-        android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Great, lets get it to its owner. What did you find?"
+            android:id="@+id/titleCap"
+            android:layout_marginTop="75dp"
+            android:visibility="gone"
+            android:typeface="sans"
+            android:textColor="#565656"
+            android:textSize="18dp" />
 
-    <DatePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/datePicker"
-        android:layout_gravity="center_horizontal" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtTitle"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:hint="Title"
+            android:textSize="25dp"
+            android:visibility="gone"
+            android:textColor="#000000" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Submit Post"
-        android:id="@+id/postButton"
-        android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Give it a short description?"
+            android:id="@+id/descCap"
+            android:layout_marginTop="30dp"
+            android:visibility="gone"
+            android:typeface="sans"
+            android:textColor="#565656"
+            android:textSize="18dp" />
 
-</LinearLayout>
-    </ScrollView>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtDesc"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:hint="Description"
+            android:textSize="25dp"
+            android:visibility="gone"
+            android:textColor="#000000" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="The location of where you found might help the one who has lost"
+            android:id="@+id/locCap"
+            android:layout_marginTop="30dp"
+            android:visibility="gone"
+            android:typeface="sans"
+            android:textColor="#565656"
+            android:textSize="18dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtLoc"
+            android:layout_gravity="center_horizontal"
+            android:hint="Location"
+            android:visibility="gone"
+            android:textSize="25dp"
+            android:textColor="#000000" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Choose the most appropriate category for the item"
+            android:id="@+id/catCap"
+            android:layout_marginTop="30dp"
+            android:visibility="gone"
+            android:typeface="sans"
+            android:textColor="#565656"
+            android:textSize="18dp" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/spinner"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="When did you find it?"
+            android:id="@+id/dateCap"
+            android:layout_marginTop="30dp"
+            android:visibility="gone"
+            android:typeface="sans"
+            android:textColor="#565656"
+            android:textSize="18dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/datePicker"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:hint="Click to set date"
+            android:focusable="false"
+            android:textSize="25dp"
+            android:visibility="gone"
+            android:textColor="#000000" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Approximate time maybe?"
+            android:id="@+id/timeCap"
+            android:layout_marginTop="30dp"
+            android:visibility="gone"
+            android:typeface="sans"
+            android:textColor="#565656"
+            android:textSize="18dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/timePicker"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:hint="Click to set time"
+            android:focusable="false"
+            android:textSize="25dp"
+            android:visibility="gone"
+            android:textColor="#000000" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit Post"
+            android:id="@+id/postButton"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+</ScrollView>
