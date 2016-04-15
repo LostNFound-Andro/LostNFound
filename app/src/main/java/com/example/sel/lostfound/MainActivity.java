@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             userName = acct.getDisplayName();
             userEmail = acct.getEmail();
             userImage = acct.getPhotoUrl();
-            if (userEmail.matches("devrogar@gmail.com"))
+            if (userEmail.matches(emailPattern))
             {
                 finish();
                 startActivity(new Intent(this, FeedActivity.class));
