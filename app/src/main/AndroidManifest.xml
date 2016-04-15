@@ -16,17 +16,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+        </activity>
+        <activity
+            android:name=".FeedActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="LostNfound"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".FeedActivity"
-            android:label="LostNfound"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="orientation|keyboardHidden|screenSize"></activity>
     </application>
 
 </manifest>
