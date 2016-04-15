@@ -10,24 +10,32 @@
     tools:context="com.example.sel.lostfound.MainActivity"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:weightSum="1" android:background="#ffffff">
+    android:weightSum="1">
 
-    <TextView
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/emailText"
+        android:hint="@string/emailText" />
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="LostNFound"
-        android:textColor="#1a237e"
-        android:id="@+id/textView2"
+        android:textAllCaps="false"
+        android:layout_marginTop="50dp"
+        android:text="@string/proceedButton"
+        android:id="@+id/proceedButton"
         android:layout_gravity="center_horizontal"
-        android:textSize="50dp" />
+        android:onClick="proceed"/>
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
-        android:layout_width="177dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.11" />
+        android:layout_gravity="center_horizontal" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -41,7 +49,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign in with your NITC email ID"
+        android:text="signed out"
         android:id="@+id/status"
         android:layout_gravity="center_horizontal" />
 
