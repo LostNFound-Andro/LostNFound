@@ -62,7 +62,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        nitc_email = (EditText) findViewById(R.id.emailText);
         mStatusTextView = (TextView) findViewById(R.id.status);
+        proceedButton = (Button) findViewById(R.id.proceedButton);
         signinButton = (com.google.android.gms.common.SignInButton) findViewById(R.id.sign_in_button);
         continueButton = (Button)findViewById(R.id.continueButton);
         continueButton.setVisibility(View.INVISIBLE);
@@ -158,7 +160,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             userImage = acct.getPhotoUrl();
             if (userEmail.matches(emailPattern))
             {
-                Toast.makeText(this,"Signed in as "+userEmail,Toast.LENGTH_LONG).show();
                 finish();
                 startActivity(new Intent(this, FeedActivity.class));
             }

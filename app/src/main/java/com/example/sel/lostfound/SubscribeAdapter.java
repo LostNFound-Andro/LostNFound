@@ -127,7 +127,7 @@ public class SubscribeAdapter extends ArrayAdapter<Category> {
 
         return row;
     }
-    
+
     private String getQuery(ContentValues params) throws UnsupportedEncodingException
     {
         StringBuilder result = new StringBuilder();

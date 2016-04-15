@@ -4,7 +4,7 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="emailText">Enter NITC email</string>
-    <string name="proceedButton">Proceed</string>
+    <string name="proceedButton">Check email</string>
     <string name="title_activity_sign_in">SignInActivity</string>
     <string name="sign_in_button">Sign in</string>
     <string name="signed_in_fmt">Signed in</string>

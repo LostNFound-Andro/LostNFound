@@ -132,7 +132,6 @@ public class UserPostAdapter extends ArrayAdapter<UserPost>{
                                     return null;
                                 }
                             }.execute();
-
                         }
                     })
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
