@@ -77,7 +77,7 @@ public class UserPostAdapter extends ArrayAdapter<UserPost>{
         TextView titleLabel = (TextView)row.findViewById(R.id.titleLabel);
         if(userPost.getPosttype().equals("1") )
         {
-            titleLabel.setText("Lost:");
+            titleLabel.setText("Lost: ");
         }
 
 

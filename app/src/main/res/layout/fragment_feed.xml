@@ -1,5 +1,5 @@
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -12,7 +12,10 @@
             android:text="Feed"
             android:id="@+id/feedTitleText"
             android:layout_gravity="center_horizontal"
-            android:textSize="35dp" />
+            android:textSize="35dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -20,14 +23,24 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text=""
             android:id="@+id/itemListText"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="384dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="83dp" />
 
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/feedtype"
             android:layout_gravity="center_horizontal"
-            />
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="126dp"
+            android:layout_toRightOf="@+id/browseText"
+            android:layout_toEndOf="@+id/browseText"
+            android:background="#d5d5d5"
+            android:paddingLeft="5dp"
+            android:layout_marginRight="10dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -35,12 +48,28 @@
             android:text="Loading..."
             android:id="@+id/loadingText"
             android:layout_gravity="center_horizontal"
-            android:textSize="25dp" />
+            android:textSize="25dp"
+            android:layout_below="@+id/feedtype"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/listView" />
+            android:id="@+id/listView"
+            android:layout_below="@+id/loadingText"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Browse : "
+            android:id="@+id/browseText"
+            android:layout_alignTop="@+id/feedtype"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
 

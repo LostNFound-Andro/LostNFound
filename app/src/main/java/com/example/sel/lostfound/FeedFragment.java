@@ -2,7 +2,6 @@ package com.example.sel.lostfound;
 
 import android.content.Context;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -20,9 +19,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.DataInputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -52,6 +48,7 @@ public class FeedFragment extends Fragment {
 
 
     List<String> posttype = new ArrayList<>(Arrays.asList("lost", "found"));
+
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -112,7 +109,25 @@ public class FeedFragment extends Fragment {
 
         mySpinner = (Spinner) myFragmentView.findViewById(R.id.feedtype);
 
-        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,posttype);
+        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,posttype)
+        {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                TextView label = new TextView(getActivity());
+//        label.setTextColor(Color.BLACK);
+                label.setText(posttype.get(position));
+                label.setTextSize(24);
+                return label;
+            }
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                TextView label = new TextView(getActivity());
+//        label.setTextColor(Color.BLACK);
+                label.setText(posttype.get(position));
+                label.setTextSize(24);
+                return label;
+            }
+        };
         mySpinner.setAdapter(adapter);
 
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
