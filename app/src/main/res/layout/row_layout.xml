@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent" android:background="#ffffff">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -8,10 +11,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="title"
         android:id="@+id/tx_title"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_margin="5dp" />
+        android:textSize="18dp"
+        android:layout_alignTop="@+id/catLabel" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -22,34 +23,28 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_margin="5dp" />
-
-    <TextView
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="desc"
-        android:id="@+id/tx_description"
-        android:layout_below="@+id/tx_title"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_toLeftOf="@+id/contact_button"
-        android:layout_toStartOf="@+id/contact_button" />
+        android:layout_margin="5dp"
+        android:textStyle="italic"
+        android:textSize="18dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="desc"
+        android:id="@+id/tx_description"
+        android:layout_below="@+id/tx_category"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/tx_date"
         android:text="date"
-        android:layout_alignLeft="@+id/tx_description"
-        android:layout_alignStart="@+id/tx_description"
         android:layout_below="@+id/tx_description"
-        android:layout_toLeftOf="@+id/contact_button"
-        android:layout_toStartOf="@+id/contact_button" />
+        android:layout_marginLeft="25dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -57,13 +52,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="time"
         android:id="@+id/tx_time"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_below="@+id/tx_date"
-        android:layout_toLeftOf="@+id/contact_button"
-        android:layout_toStartOf="@+id/contact_button" />
+        android:layout_alignTop="@+id/tx_date"
+        android:layout_toRightOf="@+id/tx_date"
+        android:layout_toEndOf="@+id/tx_date" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -72,28 +63,8 @@
         android:text="loc"
         android:id="@+id/tx_location"
         android:layout_below="@+id/tx_time"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_toLeftOf="@+id/contact_button"
-        android:layout_toStartOf="@+id/contact_button" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="email"
-        android:id="@+id/tx_email"
-        android:layout_below="@+id/tx_location"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_toLeftOf="@+id/contact_button"
-        android:layout_toStartOf="@+id/contact_button" />
+        android:layout_toRightOf="@+id/locLabel"
+        android:layout_toEndOf="@+id/locLabel" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -101,17 +72,66 @@
         android:layout_height="wrap_content"
         android:text="contact"
         android:id="@+id/contact_button"
-        android:layout_alignTop="@+id/tx_location"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/tx_time"
+        android:layout_alignRight="@+id/tx_category"
+        android:layout_alignEnd="@+id/tx_category" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Category:"
-        android:id="@+id/textView2"
+        android:id="@+id/catLabel"
         android:layout_alignBottom="@+id/tx_category"
         android:layout_toLeftOf="@+id/tx_category"
-        android:layout_toStartOf="@+id/tx_category" />
+        android:layout_toStartOf="@+id/tx_category"
+        android:textStyle="bold|italic"
+        android:textSize="18dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="at "
+        android:id="@+id/locLabel"
+        android:textSize="18dp"
+        android:layout_below="@+id/tx_time"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="on "
+        android:id="@+id/dateLabel"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#000000"
+        android:layout_below="@+id/tx_description"
+        android:layout_alignLeft="@+id/tx_description"
+        android:layout_alignStart="@+id/tx_description" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="email"
+        android:textSize="18dp"
+        android:id="@+id/tx_email"
+        android:layout_alignBottom="@+id/contact_button"
+        android:layout_toRightOf="@+id/dateLabel"
+        android:layout_toEndOf="@+id/dateLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="by"
+        android:textSize="18dp"
+        android:id="@+id/emailLabel"
+        android:textStyle="bold"
+        android:layout_alignBottom="@+id/contact_button"
+        android:layout_toLeftOf="@+id/tx_location"
+        android:layout_toStartOf="@+id/tx_location" />
 
 </RelativeLayout>
