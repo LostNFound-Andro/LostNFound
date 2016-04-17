@@ -1,4 +1,4 @@
-package com.example.sel.lostfound.dummy;
+package com.example.sel.lostfound;
 
 import android.content.Context;
 import android.view.View;
@@ -6,10 +6,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.sel.lostfound.Category;
-
-import java.security.PrivateKey;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -44,6 +40,7 @@ public class SpinnerAdapter extends ArrayAdapter<Category> {
         TextView label = new TextView(context);
 //        label.setTextColor(Color.BLACK);
         label.setText(list.get(position).getCategory());
+        label.setTextSize(24);
         return label;
     }
 
@@ -53,6 +50,7 @@ public class SpinnerAdapter extends ArrayAdapter<Category> {
         TextView label = new TextView(context);
 //        label.setTextColor(Color.BLACK);
         label.setText(list.get(position).getCategory());
+        label.setTextSize(24);
         return label;
     }
 }

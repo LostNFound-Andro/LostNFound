@@ -25,8 +25,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.sel.lostfound.dummy.SpinnerAdapter;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -188,7 +186,7 @@ public class PostFragment extends Fragment {
                                         }
                                         Log.e("List size", "" + c.size());
 
-                                        adapter = new SpinnerAdapter(getActivity(), R.layout.spinner_layout,c);
+                                        adapter = new SpinnerAdapter(getActivity(), android.R.layout.simple_spinner_item,c);
                                         mySpinner.setAdapter(adapter);
 
                                         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -362,7 +360,7 @@ public class PostFragment extends Fragment {
                                         }
                                         Log.e("List size", "" + c.size());
 
-                                        adapter = new SpinnerAdapter(getActivity(), R.layout.spinner_layout,c);
+                                        adapter = new SpinnerAdapter(getActivity(), android.R.layout.simple_spinner_item,c);
                                         mySpinner.setAdapter(adapter);
 
                                         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
