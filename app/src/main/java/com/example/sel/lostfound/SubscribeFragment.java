@@ -140,7 +140,7 @@ public class SubscribeFragment extends Fragment {
                         }
                         Log.e("List size", "" + c.size());
 
-                        adapter = new SpinnerAdapter(getActivity(), android.R.layout.simple_spinner_item,c);
+                        adapter = new SpinnerAdapter(getActivity(),R.layout.spinner_layout,c);
                         mySpinner.setAdapter(adapter);
 
                         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
