@@ -36,6 +36,7 @@ public class UserPostAdapter extends ArrayAdapter<UserPost>{
     List<UserPost> list;
     Context context;
 
+
     public UserPostAdapter(Context context, int resource, List<UserPost> objects) {
         super(context, resource, objects);
 
@@ -55,6 +56,7 @@ public class UserPostAdapter extends ArrayAdapter<UserPost>{
         {
             LayoutInflater layoutInflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = layoutInflater.inflate(R.layout.profile_row_layout,parent,false);
+
             userPostHolder = new UserPostHolder();
             userPostHolder.tx_title = (TextView) row.findViewById(R.id.tx_title);
             userPostHolder.tx_categoryid = (TextView) row.findViewById(R.id.tx_category);
@@ -72,7 +74,14 @@ public class UserPostAdapter extends ArrayAdapter<UserPost>{
 
         final UserPost userPost = (UserPost) this.getItem(position);
 
-        userPostHolder.tx_title.setText(userPost.getTitle());
+        TextView titleLabel = (TextView)row.findViewById(R.id.titleLabel);
+        if(userPost.getPosttype().equals("1") )
+        {
+            titleLabel.setText("Lost:");
+        }
+
+
+            userPostHolder.tx_title.setText(userPost.getTitle());
         userPostHolder.tx_description.setText(userPost.getDescription());
         userPostHolder.tx_categoryid.setText(userPost.getCategoryid());
         userPostHolder.tx_time.setText(userPost.getTime());

@@ -112,6 +112,7 @@ public class ProfileFragment extends Fragment {
                         for(int i=0; i < jsonArray.length(); i++){
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
 
+                            String posttype = jsonObject.optString("post_type").toString();
                             String title = jsonObject.optString("title").toString();
                             String description = jsonObject.optString("description").toString();
                             String categoryid = jsonObject.optString("cid").toString();
@@ -120,7 +121,7 @@ public class ProfileFragment extends Fragment {
                             String date = jsonObject.optString("date").toString();
                             String location = jsonObject.optString("location").toString();
 
-                            UserPost userPost = new UserPost(title,description,categoryid,postid,time,date,location);
+                            UserPost userPost = new UserPost(posttype,title,description,categoryid,postid,time,date,location);
                             p.add(userPost);
 
 

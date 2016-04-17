@@ -47,11 +47,13 @@ public class ScriptRunner extends AsyncTask<String, Void, String> {
 			conn.setDoOutput(true);
 
 			String email = MainActivity.userEmail;
+
 			OutputStream OS = conn.getOutputStream();
 			BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS, "UTF-8"));
 			ContentValues data = new ContentValues();
 
 			data.put("email", email);
+			data.put("posttype",FeedActivity.ptype);
 			Log.d("c", email);
 			bufferedWriter.write(getQuery(data));
 			bufferedWriter.flush();

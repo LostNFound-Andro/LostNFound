@@ -9,8 +9,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,6 +24,7 @@ import java.io.DataInputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -42,7 +47,12 @@ public class FeedFragment extends Fragment {
     TextView jsonParsedOutput;
     PostAdapter postAdapter;
     ListView listView;
-    //ArrayList<Posts> posts;
+    ArrayAdapter<String> adapter;
+    private Spinner mySpinner;
+
+
+    List<String> posttype = new ArrayList<>(Arrays.asList("lost", "found"));
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -100,53 +110,78 @@ public class FeedFragment extends Fragment {
 
         listView = (ListView) myFragmentView.findViewById(R.id.listView);
 
+        mySpinner = (Spinner) myFragmentView.findViewById(R.id.feedtype);
 
-        ScriptRunner run = new ScriptRunner(new ScriptRunner.ScriptFinishListener() {
+        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,posttype);
+        mySpinner.setAdapter(adapter);
+
+        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
-            public void finish(String result, int resultCode) {
-                if(resultCode==ScriptRunner.SUCCESS){
-                    //parse json
-                    Log.d("Yup","Came");
-                    String data = "";
+            public void onItemSelected(AdapterView<?> adapterView, View view,
+                                       int position, long id) {
+                // Here you get the current item (a User object) that is selected by its position
+                FeedActivity.ptype = adapter.getItem(position);
+                // Here you can do the action you want to...
 
-                    List<Posts> p = new ArrayList<Posts>();
-                    try {
-                        JSONObject jsonRootObject = new JSONObject(result);
-                        JSONArray jsonArray = jsonRootObject.getJSONArray("postlist");
-                        //Iterate the jsonArray and print the info of JSONObjects
-                        for(int i=0; i < jsonArray.length(); i++){
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Toast.makeText(getActivity(), "\ntype: " + FeedActivity.ptype,
+                        Toast.LENGTH_SHORT).show();
 
-                            String title = jsonObject.optString("title").toString();
-                            String description = jsonObject.optString("description").toString();
-                            String categoryid = jsonObject.optString("cid").toString();
-                            String emailid = jsonObject.optString("email").toString();
-                            String time = jsonObject.optString("time").toString();
-                            String date = jsonObject.optString("date").toString();
-                            String location = jsonObject.optString("location").toString();
+                ScriptRunner run = new ScriptRunner(new ScriptRunner.ScriptFinishListener() {
+                    @Override
+                    public void finish(String result, int resultCode) {
+                        if(resultCode==ScriptRunner.SUCCESS){
+                            //parse json
+                            Log.d("Yup","Came");
+                            String data = "";
 
-                            Posts posts = new Posts(title,categoryid,date,description,emailid,location,time);
-                            p.add(posts);
+                            List<Posts> p = new ArrayList<Posts>();
+                            try {
+                                JSONObject jsonRootObject = new JSONObject(result);
+                                JSONArray jsonArray = jsonRootObject.getJSONArray("postlist");
+                                //Iterate the jsonArray and print the info of JSONObjects
+                                for(int i=0; i < jsonArray.length(); i++){
+                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                                    String title = jsonObject.optString("title").toString();
+                                    String description = jsonObject.optString("description").toString();
+                                    String categoryid = jsonObject.optString("cid").toString();
+                                    String emailid = jsonObject.optString("email").toString();
+                                    String time = jsonObject.optString("time").toString();
+                                    String date = jsonObject.optString("date").toString();
+                                    String location = jsonObject.optString("location").toString();
+
+                                    Posts posts = new Posts(title,categoryid,date,description,emailid,location,time);
+                                    p.add(posts);
 
 
-                            data += "\nPost"+i+" : \n title= "+ title +" \n description= "+ description +" \n emailid= "+ emailid +" \n\n ";
-                            Log.e("c",data);
+                                    data += "\nPost"+i+" : \n title= "+ title +" \n description= "+ description +" \n emailid= "+ emailid +" \n\n ";
+                                    Log.e("c",data);
+                                }
+                                Log.e("List size",""+p.size());
+                                postAdapter = new PostAdapter(getActivity(),R.layout.row_layout,p);
+                                listView.setAdapter(postAdapter);
+                                jsonParsedOutput.setVisibility(View.GONE);
+                                listView.invalidate();
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-                        Log.e("List size",""+p.size());
-                        postAdapter = new PostAdapter(getActivity(),R.layout.row_layout,p);
-                        listView.setAdapter(postAdapter);
-                        jsonParsedOutput.setVisibility(View.GONE);
-                        listView.invalidate();
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
-                }
+                });
+
+                run.execute(postAddress);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapter) {
             }
         });
 
-        run.execute(postAddress);
+
+
 
 
 

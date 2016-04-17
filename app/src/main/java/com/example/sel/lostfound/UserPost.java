@@ -4,6 +4,7 @@ package com.example.sel.lostfound;
  * Created by bablu on 4/14/2016.
  */
 public class UserPost {
+    private String posttype;
     private String title ;
     private String description;
     private String categoryid ;
@@ -12,7 +13,8 @@ public class UserPost {
     private String date ;
     private String location ;
 
-    public UserPost(String title, String description, String categoryid, String postid, String time, String date, String location) {
+    public UserPost(String posttype,String title, String description, String categoryid, String postid, String time, String date, String location) {
+        this.posttype =posttype;
         this.title = title;
         this.description = description;
         this.categoryid = categoryid;
@@ -20,6 +22,14 @@ public class UserPost {
         this.time = time;
         this.date = date;
         this.location = location;
+    }
+
+    public String getPosttype() {
+        return posttype;
+    }
+
+    public void setPosttype(String posttype) {
+        this.posttype = posttype;
     }
 
     public String getTitle() {

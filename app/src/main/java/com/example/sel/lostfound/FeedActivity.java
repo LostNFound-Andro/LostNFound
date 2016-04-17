@@ -39,6 +39,8 @@ public class FeedActivity extends AppCompatActivity
 
     TextView nameText,emailText;
 
+    protected static String ptype = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
