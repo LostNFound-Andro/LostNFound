@@ -264,6 +264,7 @@ public class PostFragment extends Fragment {
                                             OutputStream OS = httpURLConnection.getOutputStream();
                                             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS, "UTF-8"));
                                             ContentValues data = new ContentValues();
+                                            data.put("postType",postType);
                                             data.put("email", email);
                                             data.put("title",title);
                                             data.put("description",description);
@@ -312,6 +313,169 @@ public class PostFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         postType = "lost";
+                        TextView titleCap = (TextView) myFragmentView.findViewById(R.id.titleCap);
+                        txtTitle = (TextView) myFragmentView.findViewById(R.id.txtTitle);
+                        TextView descCap = (TextView) myFragmentView.findViewById(R.id.descCap);
+                        txtDesc = (TextView) myFragmentView.findViewById(R.id.txtDesc);
+                        TextView locCap = (TextView) myFragmentView.findViewById(R.id.locCap);
+                        txtLoc = (TextView) myFragmentView.findViewById(R.id.txtLoc);
+                        TextView catCap = (TextView) myFragmentView.findViewById(R.id.catCap);
+                        mySpinner = (Spinner) myFragmentView.findViewById(R.id.spinner);
+                        TextView dateCap = (TextView) myFragmentView.findViewById(R.id.dateCap);
+                        datePicker = (TextView) myFragmentView.findViewById(R.id.datePicker);
+                        TextView timeCap = (TextView) myFragmentView.findViewById(R.id.timeCap);
+                        timePicker = (TextView) myFragmentView.findViewById(R.id.timePicker);
+                        postButton = (Button) myFragmentView.findViewById(R.id.postButton);
+                        titleCap.setText("Sorry for your loss, let us help you find it.What did you lose?");
+                        titleCap.setVisibility(View.VISIBLE);
+                        txtTitle.setVisibility(View.VISIBLE);
+
+                        descCap.setVisibility(View.VISIBLE);
+                        txtDesc.setVisibility(View.VISIBLE);
+                        locCap.setText("The location of where you lost might help you to get it back faster");
+                        locCap.setVisibility(View.VISIBLE);
+                        txtLoc.setVisibility(View.VISIBLE);
+                        catCap.setVisibility(View.VISIBLE);
+                        mySpinner.setVisibility(View.VISIBLE);
+                        //displaying categories in dropdown
+                        ScriptRunner run = new ScriptRunner(new ScriptRunner.ScriptFinishListener() {
+                            @Override
+                            public void finish(String result, int resultCode) {
+                                if(resultCode==ScriptRunner.SUCCESS){
+                                    //parse json
+
+
+                                    List<Category> c = new ArrayList<Category>();
+                                    try {
+                                        JSONObject jsonRootObject = new JSONObject(result);
+                                        JSONArray jsonArray = jsonRootObject.getJSONArray("category_list");
+                                        //Iterate the jsonArray and print the info of JSONObjects
+                                        for(int i=0; i < jsonArray.length(); i++){
+                                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                                            String categoryName = jsonObject.optString("CategoryName").toString();
+                                            String cid = jsonObject.optString("CategoryID").toString();
+
+                                            Category category = new Category(categoryName,cid);
+                                            c.add(category);
+
+                                        }
+                                        Log.e("List size", "" + c.size());
+
+                                        adapter = new SpinnerAdapter(getActivity(), android.R.layout.simple_spinner_item,c);
+                                        mySpinner.setAdapter(adapter);
+
+                                        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                                            @Override
+                                            public void onItemSelected(AdapterView<?> adapterView, View view,
+                                                                       int position, long id) {
+                                                // Here you get the current item (a User object) that is selected by its position
+                                                Category cat = adapter.getItem(position);
+                                                // Here you can do the action you want to...
+                                                catID = cat.getCid();
+                                                Toast.makeText(getActivity(), "ID: " + catID + "\ncat: " + cat.getCategory(),
+                                                        Toast.LENGTH_SHORT).show();
+                                            }
+
+                                            @Override
+                                            public void onNothingSelected(AdapterView<?> adapter) {
+                                            }
+                                        });
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        });
+                        run.execute(postAddress);
+                        dateCap.setText("When did you lose it?");
+                        dateCap.setVisibility(View.VISIBLE);
+                        datePicker.setVisibility(View.VISIBLE);
+                        datePicker.setOnClickListener(new View.OnClickListener()
+                        {
+
+                            @Override
+                            public void onClick(View v) {
+                                DialogFragment dateFragment = new DatePickerFragment();
+                                dateFragment.show(getFragmentManager(),"datePicker");
+                            }
+                        });
+                        timeCap.setVisibility(View.VISIBLE);
+                        timePicker.setVisibility(View.VISIBLE);
+                        timePicker.setOnClickListener(new View.OnClickListener()
+                        {
+
+                            @Override
+                            public void onClick(View v) {
+                                DialogFragment timeFragment = new TimePickerFragment();
+                                timeFragment.show(getFragmentManager(),"timePicker");
+                            }
+                        });
+                        postButton.setVisibility(View.VISIBLE);
+                        postButton.setOnClickListener(new View.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(getActivity(),"Posting",Toast.LENGTH_LONG).show();
+                                title = txtTitle.getText().toString();
+                                description = txtDesc.getText().toString();
+                                location = txtLoc.getText().toString();
+                                new AsyncTask<Void, Void, Void>() {
+
+                                    @Override
+                                    protected Void doInBackground(Void... params) {
+                                        String email = MainActivity.userEmail;
+                                        String checkUrl = "http://52.38.30.3/addpost.php";
+                                        try {
+                                            URL url = new URL(checkUrl);
+                                            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                                            httpURLConnection.setReadTimeout(10000);
+                                            httpURLConnection.setConnectTimeout(15000);
+                                            httpURLConnection.setRequestMethod("POST");
+                                            httpURLConnection.setDoOutput(true);
+                                            httpURLConnection.setDoInput(true);
+                                            OutputStream OS = httpURLConnection.getOutputStream();
+                                            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS, "UTF-8"));
+                                            ContentValues data = new ContentValues();
+                                            data.put("postType",postType);
+                                            data.put("email", email);
+                                            data.put("title",title);
+                                            data.put("description",description);
+                                            data.put("time",time);
+                                            data.put("date",date);
+                                            data.put("location",location);
+                                            data.put("cid",catID);
+                                            bufferedWriter.write(getQuery(data));
+                                            bufferedWriter.flush();
+                                            bufferedWriter.close();
+                                            OS.close();
+
+                                            InputStream IS = httpURLConnection.getInputStream();
+                                            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(IS,"iso-8859-1"));
+                                            String response = "";
+                                            String line = "";
+                                            while ((line = bufferedReader.readLine())!=null)
+                                            {
+                                                response+= line;
+                                            }
+                                            bufferedReader.close();
+                                            IS.close();
+                                            httpURLConnection.disconnect();
+                                        } catch (MalformedURLException e) {
+                                            e.printStackTrace();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        return null;
+                                    }
+                                }.execute();
+
+
+                            }
+
+                        });
                     }
                 })
                 .setIcon(android.R.drawable.ic_input_add)
