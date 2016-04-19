@@ -1,15 +1,37 @@
 package com.example.sel.lostfound;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONStringer;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by achu on 09-04-2016.
@@ -18,6 +40,7 @@ public class PostAdapter extends ArrayAdapter<Posts> {
 
     List<Posts> list;
     Context context;
+    private String objectString;
 
     public PostAdapter(Context context, int resource, List<Posts> posts) {
         super(context, resource,posts);
@@ -54,7 +77,7 @@ public class PostAdapter extends ArrayAdapter<Posts> {
             postHolder = (PostHolder)row.getTag();
         }
 
-        Posts posts = (Posts) this.getItem(position);
+        final Posts posts = (Posts) this.getItem(position);
 
         postHolder.tx_title.setText(posts.getTitle());
         postHolder.tx_description.setText(posts.getDescription());
@@ -80,7 +103,96 @@ public class PostAdapter extends ArrayAdapter<Posts> {
             }
         });
 
+        Button report_button = (Button) row.findViewById(R.id.report_button);
+        report_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new AsyncTask<String, Void, String>() {
+
+                    @Override
+                    protected String doInBackground(String... params) {
+                        String email = MainActivity.userEmail;
+                        String checkUrl = "http://52.38.30.3/report.php";
+                        try {
+                            URL url = new URL(checkUrl);
+                            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                            httpURLConnection.setReadTimeout(10000);
+                            httpURLConnection.setConnectTimeout(15000);
+                            httpURLConnection.setRequestMethod("POST");
+                            httpURLConnection.setDoOutput(true);
+                            httpURLConnection.setDoInput(true);
+                            OutputStream OS = httpURLConnection.getOutputStream();
+                            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS, "UTF-8"));
+                            ContentValues data = new ContentValues();
+                            data.put("post_id",posts.getPostid());
+                            data.put("email", email);
+
+                            bufferedWriter.write(getQuery(data));
+                            bufferedWriter.flush();
+                            bufferedWriter.close();
+                            OS.close();
+
+                            DataInputStream dis = new DataInputStream(httpURLConnection.getInputStream());
+                            StringBuilder stringBuilder = new StringBuilder();
+                            String line;
+
+                            do {
+                                line = dis.readLine();
+                                stringBuilder.append(line);
+
+                            } while (line != null);
+
+
+                            objectString = stringBuilder.toString();
+
+                            httpURLConnection.connect();
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+                        return objectString;
+                    }
+
+                    @Override
+                    protected void onPostExecute(String result) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(result);
+                            String status = jsonObject.optString("status").toString();
+                            Toast.makeText(context,status,Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        Log.e("check",result);
+                    }
+                }.execute();
+
+
+//                Toast.makeText(context,s, Toast.LENGTH_LONG).show();
+            }
+        });
+
         return row;
+    }
+
+    private String getQuery(ContentValues params) throws UnsupportedEncodingException
+    {
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+
+        for (Map.Entry<String, Object> entry : params.valueSet())
+        {
+            if (first)
+                first = false;
+            else
+                result.append("&");
+
+            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+            result.append("=");
+            result.append(URLEncoder.encode(entry.getValue().toString(), "UTF-8"));
+        }
+
+        return result.toString();
     }
 
     static class PostHolder{

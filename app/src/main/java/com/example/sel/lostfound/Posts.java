@@ -12,8 +12,10 @@ public class Posts {
     private String time ;
     private String date ;
     private String location ;
+    private String postid;
 
-    public Posts(String title, String categoryid, String date, String description, String emailid, String location, String time) {
+    public Posts(String postid,String title, String categoryid, String date, String description, String emailid, String location, String time) {
+        this.postid = postid;
         this.title = title;
         this.categoryid = categoryid;
         this.date = date;
@@ -21,6 +23,14 @@ public class Posts {
         this.emailid = emailid;
         this.location = location;
         this.time = time;
+    }
+
+    public String getPostid() {
+        return postid;
+    }
+
+    public void setPostid(String postid) {
+        this.postid = postid;
     }
 
     public String getCategoryid() {
