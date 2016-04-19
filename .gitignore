@@ -6,3 +6,9 @@
 .DS_Store
 /build
 /captures
+*.sty
+*.log
+*.aux
+*.idx
+*.out
+*.toc
