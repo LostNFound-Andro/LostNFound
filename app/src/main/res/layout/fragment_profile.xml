@@ -33,14 +33,16 @@
                 android:layout_gravity="right|center_vertical"
                 android:gravity="center_vertical"
                 android:textStyle="bold"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:textColor="#FFFFFF" />
 
             <TextView
                 android:layout_width="181dp"
                 android:layout_height="84dp"
                 android:text="New Text"
                 android:id="@+id/profileEmailText"
-                android:layout_gravity="right|bottom" />
+                android:layout_gravity="right|bottom"
+                android:textColor="#FFFFFF" />
 
         </FrameLayout>
         <TextView

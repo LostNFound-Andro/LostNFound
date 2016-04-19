@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="SUBSCRIBED"
+        android:text="Subscribed List"
         android:id="@+id/textView"
         android:layout_below="@+id/myspinner"
         android:layout_centerHorizontal="true"
