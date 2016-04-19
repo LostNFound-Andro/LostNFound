@@ -1,7 +1,9 @@
 package com.example.sel.lostfound;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -16,19 +18,13 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONStringer;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
@@ -112,68 +108,82 @@ public class PostAdapter extends ArrayAdapter<Posts> {
         Button report_button = (Button) row.findViewById(R.id.report_button);
         report_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                new AsyncTask<String, Void, String>() {
+                new AlertDialog.Builder(context)
+                        .setTitle("Report post")
+                        .setMessage("Are you sure you want to report this post?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                new AsyncTask<String, Void, String>() {
 
-                    @Override
-                    protected String doInBackground(String... params) {
-                        String email = MainActivity.userEmail;
-                        String checkUrl = "http://52.38.30.3/report.php";
-                        try {
-                            URL url = new URL(checkUrl);
-                            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                            httpURLConnection.setReadTimeout(10000);
-                            httpURLConnection.setConnectTimeout(15000);
-                            httpURLConnection.setRequestMethod("POST");
-                            httpURLConnection.setDoOutput(true);
-                            httpURLConnection.setDoInput(true);
-                            OutputStream OS = httpURLConnection.getOutputStream();
-                            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS, "UTF-8"));
-                            ContentValues data = new ContentValues();
-                            data.put("post_id",posts.getPostid());
-                            data.put("email", email);
+                                    @Override
+                                    protected String doInBackground(String... params) {
+                                        String email = MainActivity.userEmail;
+                                        String checkUrl = "http://52.38.30.3/report.php";
+                                        try {
+                                            URL url = new URL(checkUrl);
+                                            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                                            httpURLConnection.setReadTimeout(10000);
+                                            httpURLConnection.setConnectTimeout(15000);
+                                            httpURLConnection.setRequestMethod("POST");
+                                            httpURLConnection.setDoOutput(true);
+                                            httpURLConnection.setDoInput(true);
+                                            OutputStream OS = httpURLConnection.getOutputStream();
+                                            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS, "UTF-8"));
+                                            ContentValues data = new ContentValues();
+                                            data.put("post_id",posts.getPostid());
+                                            data.put("email", email);
 
-                            bufferedWriter.write(getQuery(data));
-                            bufferedWriter.flush();
-                            bufferedWriter.close();
-                            OS.close();
+                                            bufferedWriter.write(getQuery(data));
+                                            bufferedWriter.flush();
+                                            bufferedWriter.close();
+                                            OS.close();
 
-                            DataInputStream dis = new DataInputStream(httpURLConnection.getInputStream());
-                            StringBuilder stringBuilder = new StringBuilder();
-                            String line;
+                                            DataInputStream dis = new DataInputStream(httpURLConnection.getInputStream());
+                                            StringBuilder stringBuilder = new StringBuilder();
+                                            String line;
 
-                            do {
-                                line = dis.readLine();
-                                stringBuilder.append(line);
+                                            do {
+                                                line = dis.readLine();
+                                                stringBuilder.append(line);
 
-                            } while (line != null);
-
-
-                            objectString = stringBuilder.toString();
-
-                            httpURLConnection.connect();
-
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
-
-                        return objectString;
-                    }
-
-                    @Override
-                    protected void onPostExecute(String result) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(result);
-                            String status = jsonObject.optString("status").toString();
-                            Toast.makeText(context,status,Toast.LENGTH_LONG).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                        Log.e("check",result);
-                    }
-                }.execute();
+                                            } while (line != null);
 
 
+                                            objectString = stringBuilder.toString();
+
+                                            httpURLConnection.connect();
+
+                                        }catch (Exception e){
+                                            e.printStackTrace();
+                                        }
+
+                                        return objectString;
+                                    }
+
+                                    @Override
+                                    protected void onPostExecute(String result) {
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(result);
+                                            String status = jsonObject.optString("status").toString();
+                                            Toast.makeText(context,status,Toast.LENGTH_LONG).show();
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        Log.e("check",result);
+                                    }
+                                }.execute();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
 //                Toast.makeText(context,s, Toast.LENGTH_LONG).show();
             }
         });
