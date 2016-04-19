@@ -94,7 +94,7 @@ public class PostFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    Button postButton;
+    protected static Button postButton;
 
     public PostFragment() {
         // Required empty public constructor
@@ -236,75 +236,83 @@ public class PostFragment extends Fragment {
                                 timeFragment.show(getFragmentManager(),"timePicker");
                             }
                         });
+
                         postButton.setVisibility(View.VISIBLE);
                         postButton.setOnClickListener(new View.OnClickListener()
                         {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(getActivity(),"Posting",Toast.LENGTH_LONG).show();
-                                title = txtTitle.getText().toString();
-                                description = txtDesc.getText().toString();
-                                location = txtLoc.getText().toString();
-                                new AsyncTask<Void, Void, Void>() {
 
-                                    @Override
-                                    protected Void doInBackground(Void... params) {
-                                        String email = MainActivity.userEmail;
-                                        String checkUrl = "http://52.38.30.3/addpost.php";
-                                        try {
-                                            URL url = new URL(checkUrl);
-                                            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                                            httpURLConnection.setReadTimeout(10000);
-                                            httpURLConnection.setConnectTimeout(15000);
-                                            httpURLConnection.setRequestMethod("POST");
-                                            httpURLConnection.setDoOutput(true);
-                                            httpURLConnection.setDoInput(true);
-                                            OutputStream OS = httpURLConnection.getOutputStream();
-                                            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS, "UTF-8"));
-                                            ContentValues data = new ContentValues();
-                                            data.put("postType",postType);
-                                            data.put("email", email);
-                                            data.put("title",title);
-                                            data.put("description",description);
-                                            data.put("time",time);
-                                            data.put("date",date);
-                                            data.put("location",location);
-                                            data.put("cid",catID);
-                                            bufferedWriter.write(getQuery(data));
-                                            bufferedWriter.flush();
-                                            bufferedWriter.close();
-                                            OS.close();
+                                    //Toast.makeText(getActivity(),"Posting",Toast.LENGTH_LONG).show();
+                                    title = txtTitle.getText().toString();
+                                    description = txtDesc.getText().toString();
+                                    location = txtLoc.getText().toString();
+                                if (title.trim().length() != 0 && time.trim().length() != 0 && date.trim().length() != 0) {
+                                    new AsyncTask<Void, Void, Void>() {
 
-                                            InputStream IS = httpURLConnection.getInputStream();
-                                            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(IS,"iso-8859-1"));
-                                            String response = "";
-                                            String line = "";
-                                            while ((line = bufferedReader.readLine())!=null)
-                                            {
-                                                response+= line;
+                                        @Override
+                                        protected Void doInBackground(Void... params) {
+                                            String email = MainActivity.userEmail;
+                                            String checkUrl = "http://52.38.30.3/addpost.php";
+                                            try {
+                                                URL url = new URL(checkUrl);
+                                                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                                                httpURLConnection.setReadTimeout(10000);
+                                                httpURLConnection.setConnectTimeout(15000);
+                                                httpURLConnection.setRequestMethod("POST");
+                                                httpURLConnection.setDoOutput(true);
+                                                httpURLConnection.setDoInput(true);
+                                                OutputStream OS = httpURLConnection.getOutputStream();
+                                                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS, "UTF-8"));
+                                                ContentValues data = new ContentValues();
+                                                data.put("postType", postType);
+                                                data.put("email", email);
+                                                data.put("title", title);
+                                                data.put("description", description);
+                                                data.put("time", time);
+                                                data.put("date", date);
+                                                data.put("location", location);
+                                                data.put("cid", catID);
+                                                bufferedWriter.write(getQuery(data));
+                                                bufferedWriter.flush();
+                                                bufferedWriter.close();
+                                                OS.close();
+
+                                                InputStream IS = httpURLConnection.getInputStream();
+                                                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(IS, "iso-8859-1"));
+                                                String response = "";
+                                                String line = "";
+                                                while ((line = bufferedReader.readLine()) != null) {
+                                                    response += line;
+                                                }
+                                                bufferedReader.close();
+                                                IS.close();
+                                                httpURLConnection.disconnect();
+                                            } catch (MalformedURLException e) {
+                                                e.printStackTrace();
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
                                             }
-                                            bufferedReader.close();
-                                            IS.close();
-                                            httpURLConnection.disconnect();
-                                        } catch (MalformedURLException e) {
-                                            e.printStackTrace();
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
+                                            return null;
                                         }
-                                        return null;
-                                    }
-                                }.execute();
+
+                                        @Override
+                                        protected void onPostExecute(Void aVoid) {
+                                            ProfileFragment profileFragment = new ProfileFragment();
+                                            android.support.v4.app.FragmentTransaction fragmentTransaction = ((FeedActivity)getActivity()).getSupportFragmentManager().beginTransaction();
+                                            fragmentTransaction.replace(R.id.fragment_container, profileFragment);
+                                            fragmentTransaction.commit();
+                                        }
+                                    }.execute();
 
 
+                                }
+                                else
+                                {
+                                    Toast.makeText(getActivity(),"All fields are mandatory",Toast.LENGTH_LONG).show();
+                                }
                             }
-
                         });
-                    }
-                })
-                .setNeutralButton("Go back", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //do nothing or add go back function
                     }
                 })
                 .setNegativeButton("I've lost an item", new DialogInterface.OnClickListener() {
@@ -411,74 +419,87 @@ public class PostFragment extends Fragment {
                                 timeFragment.show(getFragmentManager(),"timePicker");
                             }
                         });
+
                         postButton.setVisibility(View.VISIBLE);
                         postButton.setOnClickListener(new View.OnClickListener()
                         {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(getActivity(),"Posting",Toast.LENGTH_LONG).show();
-                                title = txtTitle.getText().toString();
-                                description = txtDesc.getText().toString();
-                                location = txtLoc.getText().toString();
-                                new AsyncTask<Void, Void, Void>() {
 
-                                    @Override
-                                    protected Void doInBackground(Void... params) {
-                                        String email = MainActivity.userEmail;
-                                        String checkUrl = "http://52.38.30.3/addpost.php";
-                                        try {
-                                            URL url = new URL(checkUrl);
-                                            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                                            httpURLConnection.setReadTimeout(10000);
-                                            httpURLConnection.setConnectTimeout(15000);
-                                            httpURLConnection.setRequestMethod("POST");
-                                            httpURLConnection.setDoOutput(true);
-                                            httpURLConnection.setDoInput(true);
-                                            OutputStream OS = httpURLConnection.getOutputStream();
-                                            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS, "UTF-8"));
-                                            ContentValues data = new ContentValues();
-                                            data.put("postType",postType);
-                                            data.put("email", email);
-                                            data.put("title",title);
-                                            data.put("description",description);
-                                            data.put("time",time);
-                                            data.put("date",date);
-                                            data.put("location",location);
-                                            data.put("cid",catID);
-                                            bufferedWriter.write(getQuery(data));
-                                            bufferedWriter.flush();
-                                            bufferedWriter.close();
-                                            OS.close();
+                                    //Toast.makeText(getActivity(),"Posting",Toast.LENGTH_LONG).show();
+                                    title = txtTitle.getText().toString();
+                                    description = txtDesc.getText().toString();
+                                    location = txtLoc.getText().toString();
+                                if (title.trim().length() != 0 && time.trim().length() != 0 && date.trim().length() != 0) {
+                                    new AsyncTask<Void, Void, Void>() {
 
-                                            InputStream IS = httpURLConnection.getInputStream();
-                                            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(IS,"iso-8859-1"));
-                                            String response = "";
-                                            String line = "";
-                                            while ((line = bufferedReader.readLine())!=null)
-                                            {
-                                                response+= line;
+                                        @Override
+                                        protected Void doInBackground(Void... params) {
+                                            String email = MainActivity.userEmail;
+                                            String checkUrl = "http://52.38.30.3/addpost.php";
+                                            try {
+                                                URL url = new URL(checkUrl);
+                                                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                                                httpURLConnection.setReadTimeout(10000);
+                                                httpURLConnection.setConnectTimeout(15000);
+                                                httpURLConnection.setRequestMethod("POST");
+                                                httpURLConnection.setDoOutput(true);
+                                                httpURLConnection.setDoInput(true);
+                                                OutputStream OS = httpURLConnection.getOutputStream();
+                                                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS, "UTF-8"));
+                                                ContentValues data = new ContentValues();
+                                                data.put("postType", postType);
+                                                data.put("email", email);
+                                                data.put("title", title);
+                                                data.put("description", description);
+                                                data.put("time", time);
+                                                data.put("date", date);
+                                                data.put("location", location);
+                                                data.put("cid", catID);
+                                                bufferedWriter.write(getQuery(data));
+                                                bufferedWriter.flush();
+                                                bufferedWriter.close();
+                                                OS.close();
+
+                                                InputStream IS = httpURLConnection.getInputStream();
+                                                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(IS, "iso-8859-1"));
+                                                String response = "";
+                                                String line = "";
+                                                while ((line = bufferedReader.readLine()) != null) {
+                                                    response += line;
+                                                }
+                                                bufferedReader.close();
+                                                IS.close();
+                                                httpURLConnection.disconnect();
+                                            } catch (MalformedURLException e) {
+                                                e.printStackTrace();
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
                                             }
-                                            bufferedReader.close();
-                                            IS.close();
-                                            httpURLConnection.disconnect();
-                                        } catch (MalformedURLException e) {
-                                            e.printStackTrace();
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
+                                            return null;
                                         }
-                                        return null;
-                                    }
-                                }.execute();
+
+                                        @Override
+                                        protected void onPostExecute(Void aVoid) {
+                                            ProfileFragment profileFragment = new ProfileFragment();
+                                            android.support.v4.app.FragmentTransaction fragmentTransaction = ((FeedActivity)getActivity()).getSupportFragmentManager().beginTransaction();
+                                            fragmentTransaction.replace(R.id.fragment_container, profileFragment);
+                                            fragmentTransaction.commit();
+                                        }
+                                    }.execute();
 
 
+                                }
+                                else
+                                {
+                                    Toast.makeText(getActivity(),"All fields are mandatory",Toast.LENGTH_LONG).show();
+                                }
                             }
-
                         });
                     }
                 })
                 .setIcon(android.R.drawable.ic_input_add)
                 .show();
-
         return myFragmentView;
     }
 
@@ -515,7 +536,9 @@ public class PostFragment extends Fragment {
             int day = c.get(Calendar.DAY_OF_MONTH);
 
             // Create a new instance of DatePickerDialog and return it
-            return new DatePickerDialog(getActivity(), this, year, month, day);
+            DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), this, year, month, day);
+            datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+            return datePickerDialog;
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {

@@ -268,6 +268,14 @@ public class SubscribeFragment extends Fragment {
                         }
                         return null;
                     }
+
+                    @Override
+                    protected void onPostExecute(Void aVoid) {
+                        SubscribeFragment subscribeFragment = new SubscribeFragment();
+                        android.support.v4.app.FragmentTransaction fragmentTransaction = ((FeedActivity)getActivity()).getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container, subscribeFragment);
+                        fragmentTransaction.commit();
+                    }
                 }.execute();
 
 

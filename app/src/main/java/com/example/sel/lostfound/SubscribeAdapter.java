@@ -118,6 +118,14 @@ public class SubscribeAdapter extends ArrayAdapter<Category> {
                         }
                         return null;
                     }
+
+                    @Override
+                    protected void onPostExecute(Void aVoid) {
+                        SubscribeFragment subscribeFragment = new SubscribeFragment();
+                        android.support.v4.app.FragmentTransaction fragmentTransaction = ((FeedActivity)context).getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container, subscribeFragment);
+                        fragmentTransaction.commit();
+                    }
                 }.execute();
             }
         });

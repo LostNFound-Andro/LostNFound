@@ -140,6 +140,14 @@ public class UserPostAdapter extends ArrayAdapter<UserPost>{
                                     }
                                     return null;
                                 }
+
+                                @Override
+                                protected void onPostExecute(Void aVoid) {
+                                    ProfileFragment profileFragment = new ProfileFragment();
+                                    android.support.v4.app.FragmentTransaction fragmentTransaction = ((FeedActivity)context).getSupportFragmentManager().beginTransaction();
+                                    fragmentTransaction.replace(R.id.fragment_container, profileFragment);
+                                    fragmentTransaction.commit();
+                                }
                             }.execute();
                         }
                     })
