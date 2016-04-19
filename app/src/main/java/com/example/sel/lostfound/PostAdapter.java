@@ -59,7 +59,7 @@ public class PostAdapter extends ArrayAdapter<Posts> {
         postHolder.tx_title.setText(posts.getTitle());
         postHolder.tx_description.setText(posts.getDescription());
         postHolder.tx_categoryid.setText(posts.getCategoryid());
-        postHolder.tx_emailid.setText(posts.getEmailid());
+        postHolder.tx_emailid.setText(posts.getEmailid().replaceFirst("@nitc.ac.in",""));
         postHolder.tx_time.setText(posts.getTime());
         postHolder.tx_date.setText(posts.getDate());
         postHolder.tx_location.setText(posts.getLocation());

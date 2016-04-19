@@ -35,7 +35,9 @@
         android:id="@+id/tx_description"
         android:layout_below="@+id/tx_category"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/catLabel"
+        android:layout_toLeftOf="@+id/catLabel" />
 
     <TextView
         android:layout_width="100dp"
@@ -133,5 +135,15 @@
         android:layout_alignBottom="@+id/contact_button"
         android:layout_toLeftOf="@+id/tx_location"
         android:layout_toStartOf="@+id/tx_location" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Report"
+        android:id="@+id/report_button"
+        android:layout_above="@id/contact_button"
+        android:layout_alignRight="@+id/contact_button"
+        android:layout_alignEnd="@+id/contact_button" />
 
 </RelativeLayout>
