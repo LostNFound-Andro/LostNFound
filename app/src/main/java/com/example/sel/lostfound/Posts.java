@@ -13,8 +13,9 @@ public class Posts {
     private String date ;
     private String location ;
     private String postid;
+    private int count;
 
-    public Posts(String postid,String title, String categoryid, String date, String description, String emailid, String location, String time) {
+    public Posts(String postid,String title, String categoryid, String date, String description, String emailid, String location, String time,int count) {
         this.postid = postid;
         this.title = title;
         this.categoryid = categoryid;
@@ -23,6 +24,15 @@ public class Posts {
         this.emailid = emailid;
         this.location = location;
         this.time = time;
+        this.count = count;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public String getPostid() {
