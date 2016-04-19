@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,6 +79,11 @@ public class PostAdapter extends ArrayAdapter<Posts> {
         }
 
         final Posts posts = (Posts) this.getItem(position);
+
+        if(posts.getCount() >=3) {
+            RelativeLayout relativeLayout = (RelativeLayout) row.findViewById(R.id.row);
+            relativeLayout.setBackgroundColor(0xFFFC8F8F);
+        }
 
         postHolder.tx_title.setText(posts.getTitle());
         postHolder.tx_description.setText(posts.getDescription());

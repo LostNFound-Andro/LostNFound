@@ -166,8 +166,9 @@ public class FeedFragment extends Fragment {
                                     String date = jsonObject.optString("date").toString();
                                     String location = jsonObject.optString("location").toString();
                                     String postid = jsonObject.optString("post_id").toString();
+                                    int count = Integer.parseInt(jsonObject.optString("count").toString());
 
-                                    Posts posts = new Posts(postid,title,categoryid,date,description,emailid,location,time);
+                                    Posts posts = new Posts(postid,title,categoryid,date,description,emailid,location,time,count);
                                     p.add(posts);
 
 
