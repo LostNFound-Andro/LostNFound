@@ -18,7 +18,18 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/emailText"
-        android:hint="@string/emailText" />
+        android:hint="@string/emailText"
+        android:visibility="gone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LostNFound"
+        android:id="@+id/main_title"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#272c74"
+        android:textSize="38dp"
+        android:layout_marginTop="-35dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -28,13 +39,14 @@
         android:text="@string/proceedButton"
         android:id="@+id/proceedButton"
         android:layout_gravity="center_horizontal"
-        android:onClick="proceed"/>
+        android:onClick="proceed"
+        android:visibility="gone" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="50dp"
         android:layout_gravity="center_horizontal" />
 
     <TextView
@@ -44,7 +56,8 @@
         android:text="No Internet Connection. Connect to internet and restart app."
         android:id="@+id/textConnectivity"
         android:layout_weight="0.06"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal" />
 
     <TextView
         android:layout_width="wrap_content"

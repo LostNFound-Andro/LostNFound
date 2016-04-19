@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onResult(Status status) {
                         // [START_EXCLUDE]
-                        proceedButton.setVisibility(View.VISIBLE);
+                        //proceedButton.setVisibility(View.VISIBLE);
                         signinButton.setVisibility(View.VISIBLE);
                         continueButton.setVisibility(View.INVISIBLE);
                         changeSignIn.setVisibility(View.INVISIBLE);
