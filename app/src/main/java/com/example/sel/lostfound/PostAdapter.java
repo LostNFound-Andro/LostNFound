@@ -33,12 +33,15 @@ import java.util.Map;
 /**
  * Created by achu on 09-04-2016.
  */
+ /**
+ * A class implementing functions to get data from web server and implements report use-case
+ **/
 public class PostAdapter extends ArrayAdapter<Posts> {
 
     List<Posts> list;
     Context context;
     private String objectString;
-
+    //! a constructor
     public PostAdapter(Context context, int resource, List<Posts> posts) {
         super(context, resource,posts);
         this.context =context;
@@ -47,8 +50,9 @@ public class PostAdapter extends ArrayAdapter<Posts> {
 
 
     @Override
+    //!  implementing list view of posts
     public View getView(int position, View convertView, ViewGroup parent) {
-
+        
         View row;
         row = convertView;
         final PostHolder postHolder;
@@ -75,12 +79,12 @@ public class PostAdapter extends ArrayAdapter<Posts> {
         }
 
         final Posts posts = (Posts) this.getItem(position);
-
+        //! reported(reported more than thrice) posts
         if(posts.getCount() >=3) {
             RelativeLayout relativeLayout = (RelativeLayout) row.findViewById(R.id.row);
             relativeLayout.setBackgroundColor(0xFFFC8F8F);
         }
-
+        //! display posts in list format
         postHolder.tx_title.setText(posts.getTitle());
         postHolder.tx_description.setText(posts.getDescription());
         postHolder.tx_categoryid.setText(posts.getCategoryid());
@@ -89,11 +93,12 @@ public class PostAdapter extends ArrayAdapter<Posts> {
         postHolder.tx_date.setText(posts.getDate());
         postHolder.tx_location.setText(posts.getLocation());
 
-        Button contact_button = (Button) row.findViewById(R.id.contact_button);
+        Button contact_button = (Button) row.findViewById(R.id.contact_button); /*!< contact button to contact the author */
+        //! function to implement action on clicking contact button
         contact_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String s = String.valueOf(postHolder.tx_emailid.getText());
-
+		//! new page directed consisting of compose email
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("plain/text");
                 intent.putExtra(Intent.EXTRA_EMAIL, new String[] { s });
@@ -104,7 +109,7 @@ public class PostAdapter extends ArrayAdapter<Posts> {
 //                Toast.makeText(context,s, Toast.LENGTH_LONG).show();
             }
         });
-
+        //! report button implementation
         Button report_button = (Button) row.findViewById(R.id.report_button);
         report_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -117,6 +122,7 @@ public class PostAdapter extends ArrayAdapter<Posts> {
                                 new AsyncTask<String, Void, String>() {
 
                                     @Override
+                                    //! function to update report count in database in webserver
                                     protected String doInBackground(String... params) {
                                         String email = MainActivity.userEmail;
                                         String checkUrl = "http://52.38.30.3/report.php";
@@ -162,6 +168,7 @@ public class PostAdapter extends ArrayAdapter<Posts> {
                                     }
 
                                     @Override
+                                    //! server response via OnPostExecute function
                                     protected void onPostExecute(String result) {
                                         try {
                                             JSONObject jsonObject = new JSONObject(result);
@@ -190,7 +197,9 @@ public class PostAdapter extends ArrayAdapter<Posts> {
 
         return row;
     }
-
+     /**
+    * Function to send a request to web server
+    */
     private String getQuery(ContentValues params) throws UnsupportedEncodingException
     {
         StringBuilder result = new StringBuilder();
@@ -210,7 +219,9 @@ public class PostAdapter extends ArrayAdapter<Posts> {
 
         return result.toString();
     }
-
+    /**
+    * class containing variables for list view
+    **/
     static class PostHolder{
         TextView  tx_title,tx_description,tx_categoryid,tx_emailid,tx_time,tx_date,tx_location ;
     }

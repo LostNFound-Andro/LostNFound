@@ -59,28 +59,31 @@ import java.util.Map;
  * Use the {@link PostFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+/**
+* class implementing post page
+**/ 
 public class PostFragment extends Fragment {
 
 
-    TextView txtTitle;
-    TextView txtDesc;
-    TextView txtLoc;
-    public static  TextView timePicker;
-    public static TextView datePicker;
+    TextView txtTitle;	/*!< Variable for storing title input by user */
+    TextView txtDesc;	/*!< Variable for storing description input by user */
+    TextView txtLoc;	/*!< Variable for storing location input by user */
+    public static  TextView timePicker;	/*!< Variable for storing time selected by user */
+    public static TextView datePicker;	/*!< Variable for storing date selected by user */
 
 
-    String postAddress = "http://52.38.30.3/getallcat.php";
-    private Spinner mySpinner;
+    String postAddress = "http://52.38.30.3/getallcat.php"; /*!< address to access the category stored in database via php */
+    private Spinner mySpinner; /*!< spinnner instance for dropdown */
 
     private SpinnerAdapter adapter;
     private View myFragmentView;
-    private String catID;
+    private String catID; /*!< stores category id */
 
     protected static String postType = "";
 
 
 
-    private static String title,description,location,time,date;
+    private static String title,description,location,time,date; /*!< variables to store values to be inserted into the database */
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -94,7 +97,7 @@ public class PostFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    protected static Button postButton;
+    protected static Button postButton; /*!< variable for post button */
 
     public PostFragment() {
         // Required empty public constructor
@@ -109,6 +112,9 @@ public class PostFragment extends Fragment {
      * @return A new instance of fragment PostFragment.
      */
     // TODO: Rename and change types and number of parameters
+    /**
+    * function implementing a new post page 
+    */
     public static PostFragment newInstance(String param1, String param2) {
         PostFragment fragment = new PostFragment();
         Bundle args = new Bundle();
@@ -119,6 +125,7 @@ public class PostFragment extends Fragment {
     }
 
     @Override
+    //! functions to be done after opening new instance of post fragment.
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((FeedActivity) getActivity()).getSupportActionBar().setTitle("Post");
@@ -129,6 +136,7 @@ public class PostFragment extends Fragment {
     }
 
     @Override
+    //! function implementing task of extracting input by user into database
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -139,7 +147,8 @@ public class PostFragment extends Fragment {
                 .setPositiveButton("I've found an item", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        postType = "found";
+                        postType = "found"; /*!< postType contains decision by user if found or lost item to be posted */
+                        //! initialisation of the variables extracting the input
                         TextView titleCap = (TextView) myFragmentView.findViewById(R.id.titleCap);
                         txtTitle = (TextView) myFragmentView.findViewById(R.id.txtTitle);
                         TextView descCap = (TextView) myFragmentView.findViewById(R.id.descCap);
@@ -168,7 +177,7 @@ public class PostFragment extends Fragment {
                                 if(resultCode==ScriptRunner.SUCCESS){
                                     //parse json
 
-
+				//! fetching category list from database to be displayed using json
                                     List<Category> c = new ArrayList<Category>();
                                     try {
                                         JSONObject jsonRootObject = new JSONObject(result);
@@ -216,6 +225,7 @@ public class PostFragment extends Fragment {
                         run.execute(postAddress);
                         dateCap.setVisibility(View.VISIBLE);
                         datePicker.setVisibility(View.VISIBLE);
+                        //! function to be executed on selecting a date via datepicker
                         datePicker.setOnClickListener(new View.OnClickListener()
                         {
 
@@ -227,6 +237,7 @@ public class PostFragment extends Fragment {
                         });
                         timeCap.setVisibility(View.VISIBLE);
                         timePicker.setVisibility(View.VISIBLE);
+                        //! function to be executed on selecting a time via timepicker
                         timePicker.setOnClickListener(new View.OnClickListener()
                         {
 
@@ -238,22 +249,27 @@ public class PostFragment extends Fragment {
                         });
 
                         postButton.setVisibility(View.VISIBLE);
+                        //! functions to be executed on clicking post button
                         postButton.setOnClickListener(new View.OnClickListener()
                         {
                             @Override
                             public void onClick(View v) {
 
                                     //Toast.makeText(getActivity(),"Posting",Toast.LENGTH_LONG).show();
-                                    title = txtTitle.getText().toString();
-                                    description = txtDesc.getText().toString();
-                                    location = txtLoc.getText().toString();
+                                    title = txtTitle.getText().toString(); /*!< feeding input title into the variable */
+                                    description = txtDesc.getText().toString(); /*!< feeding input description into the variable*/
+                                    location = txtLoc.getText().toString(); /*!< feeding input location into the variable */
                                 if (title.trim().length() != 0 && time.trim().length() != 0 && date.trim().length() != 0) {
                                     new AsyncTask<Void, Void, Void>() {
 
                                         @Override
+                                        /**
+                                        * function to implement posting of user input into database.
+                                        **/
                                         protected Void doInBackground(Void... params) {
-                                            String email = MainActivity.userEmail;
-                                            String checkUrl = "http://52.38.30.3/addpost.php";
+                                            String email = MainActivity.userEmail; /*!< store the user email id */
+                                            String checkUrl = "http://52.38.30.3/addpost.php"; /*!< url of webserver*/
+                                            //! establishing connection
                                             try {
                                                 URL url = new URL(checkUrl);
                                                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -265,14 +281,14 @@ public class PostFragment extends Fragment {
                                                 OutputStream OS = httpURLConnection.getOutputStream();
                                                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS, "UTF-8"));
                                                 ContentValues data = new ContentValues();
-                                                data.put("postType", postType);
-                                                data.put("email", email);
-                                                data.put("title", title);
-                                                data.put("description", description);
-                                                data.put("time", time);
-                                                data.put("date", date);
-                                                data.put("location", location);
-                                                data.put("cid", catID);
+                                                data.put("postType", postType); /*!< writing (lost/found) type into db */
+                                                data.put("email", email); /*!< writing email into db */
+                                                data.put("title", title); /*!< writing title into db */
+                                                data.put("description", description); /*!< writing description into db */
+                                                data.put("time", time); /*!< writing time into db */
+                                                data.put("date", date); /*!< writing date into db */
+                                                data.put("location", location); /*!< writing location into db */
+                                                data.put("cid", catID); /*!< writing category id into db */
                                                 bufferedWriter.write(getQuery(data));
                                                 bufferedWriter.flush();
                                                 bufferedWriter.close();
@@ -315,10 +331,12 @@ public class PostFragment extends Fragment {
                         });
                     }
                 })
+                //! posting lost item
                 .setNegativeButton("I've lost an item", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        postType = "lost";
+                        postType = "lost"; /*!< postType set to lost */
+                        //! initialisation of variables to extract user inputs
                         TextView titleCap = (TextView) myFragmentView.findViewById(R.id.titleCap);
                         txtTitle = (TextView) myFragmentView.findViewById(R.id.txtTitle);
                         TextView descCap = (TextView) myFragmentView.findViewById(R.id.descCap);
@@ -343,19 +361,19 @@ public class PostFragment extends Fragment {
                         txtLoc.setVisibility(View.VISIBLE);
                         catCap.setVisibility(View.VISIBLE);
                         mySpinner.setVisibility(View.VISIBLE);
-                        //displaying categories in dropdown
+                        //!displaying categories in dropdown
                         ScriptRunner run = new ScriptRunner(new ScriptRunner.ScriptFinishListener() {
                             @Override
                             public void finish(String result, int resultCode) {
                                 if(resultCode==ScriptRunner.SUCCESS){
-                                    //parse json
+                                    //!parse json
 
 
                                     List<Category> c = new ArrayList<Category>();
                                     try {
                                         JSONObject jsonRootObject = new JSONObject(result);
                                         JSONArray jsonArray = jsonRootObject.getJSONArray("category_list");
-                                        //Iterate the jsonArray and print the info of JSONObjects
+                                        //!Iterate the jsonArray and print the info of JSONObjects
                                         for(int i=0; i < jsonArray.length(); i++){
                                             JSONObject jsonObject = jsonArray.getJSONObject(i);
 
@@ -421,6 +439,7 @@ public class PostFragment extends Fragment {
                         });
 
                         postButton.setVisibility(View.VISIBLE);
+                        //@see postButton.setOnClickListener for 'found'
                         postButton.setOnClickListener(new View.OnClickListener()
                         {
                             @Override
@@ -502,18 +521,18 @@ public class PostFragment extends Fragment {
                 .show();
         return myFragmentView;
     }
-
+    //! A class implementing time picker 
     public static class TimePickerFragment extends DialogFragment
             implements TimePickerDialog.OnTimeSetListener {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current time as the default values for the picker
+            //! Use the current time as the default values for the picker
             final Calendar c = Calendar.getInstance();
             int hour = c.get(Calendar.HOUR_OF_DAY);
             int minute = c.get(Calendar.MINUTE);
 
-            // Create a new instance of TimePickerDialog and return it
+            //! Create a new instance of TimePickerDialog and return it
             return new TimePickerDialog(getActivity(), this, hour, minute,
                     DateFormat.is24HourFormat(getActivity()));
         }
@@ -523,19 +542,19 @@ public class PostFragment extends Fragment {
             timePicker.setText(time);
         }
     }
-
+   //! a class implementing date picker
     public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current date as the default date in the picker
+            //! Use the current date as the default date in the picker
             final Calendar c = Calendar.getInstance();
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
 
-            // Create a new instance of DatePickerDialog and return it
+            //! Create a new instance of DatePickerDialog and return it
             DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), this, year, month, day);
             datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
             return datePickerDialog;

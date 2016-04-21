@@ -21,6 +21,9 @@ import android.view.ViewGroup;
  * Use the {@link InfoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+ /**
+ * A class implementing Help and FAQ fragment of navigation bar
+ **/
 public class InfoFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,7 +34,7 @@ public class InfoFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener; /*!<  */ 
 
     public InfoFragment() {
         // Required empty public constructor
@@ -46,6 +49,7 @@ public class InfoFragment extends Fragment {
      * @return A new instance of fragment InfoFragment.
      */
     // TODO: Rename and change types and number of parameters
+    //! a constructor
     public static InfoFragment newInstance(String param1, String param2) {
         InfoFragment fragment = new InfoFragment();
         Bundle args = new Bundle();
@@ -56,9 +60,10 @@ public class InfoFragment extends Fragment {
     }
 
     @Override
+    //! on opening or selecting info fragment from navigation bar
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((FeedActivity) getActivity()).getSupportActionBar().setTitle("Info");
+        ((FeedActivity) getActivity()).getSupportActionBar().setTitle("Info"); /*!< Info action bar in navigation bar */
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);

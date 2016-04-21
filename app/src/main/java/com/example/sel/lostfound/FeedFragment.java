@@ -36,18 +36,21 @@ import java.util.List;
  * Use the {@link FeedFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+ /**
+ * A class implementing fragment of feed when its clicked on navigation bar
+ **/
 public class FeedFragment extends Fragment {
 
-    String postAddress = "http://52.38.30.3/getpost.php";
-    TextView itemListText;
-    TextView jsonParsedOutput;
-    PostAdapter postAdapter;
-    ListView listView;
-    ArrayAdapter<String> adapter;
-    private Spinner mySpinner;
+    String postAddress = "http://52.38.30.3/getpost.php"; /*!< variable postaddress stores the address of web server  */
+    TextView itemListText; /*!<   */
+    TextView jsonParsedOutput; /*!<   */
+    PostAdapter postAdapter; /*!<   */
+    ListView listView; /*!< list view variable to display feeds in list form */
+    ArrayAdapter<String> adapter; /*!<   */
+    private Spinner mySpinner; /*!< spinner variable for dropdown list implementation */
 
 
-    List<String> posttype = new ArrayList<>(Arrays.asList("lost", "found"));
+    List<String> posttype = new ArrayList<>(Arrays.asList("lost", "found")); 
 
 
 
@@ -76,6 +79,7 @@ public class FeedFragment extends Fragment {
      * @return A new instance of fragment FeedFragment.
      */
     // TODO: Rename and change types and number of parameters
+    //! new instance of fragment 
     public static FeedFragment newInstance(String param1, String param2) {
         FeedFragment fragment = new FeedFragment();
         Bundle args = new Bundle();
@@ -86,6 +90,7 @@ public class FeedFragment extends Fragment {
     }
 
     @Override
+    //! function on clicking 'Feed' on the navigation bar
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((FeedActivity) getActivity()).getSupportActionBar().setTitle("Feed");
@@ -100,45 +105,50 @@ public class FeedFragment extends Fragment {
     }
 
     @Override
+    //! function on opening feed page
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         String data = "";
 
-        listView = (ListView) myFragmentView.findViewById(R.id.listView);
+        listView = (ListView) myFragmentView.findViewById(R.id.listView);  /*!<list view instance */
 
-        mySpinner = (Spinner) myFragmentView.findViewById(R.id.feedtype);
+        mySpinner = (Spinner) myFragmentView.findViewById(R.id.feedtype);	/*!< spinner for dropdown list of found or lost type */
 
         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,posttype)
         {
             @Override
+            //! dropdown lost
             public View getView(int position, View convertView, ViewGroup parent) {
                 TextView label = new TextView(getActivity());
-//        label.setTextColor(Color.BLACK);
+
                 label.setText(posttype.get(position));
                 label.setTextSize(24);
                 return label;
             }
             @Override
+            //! dropdown found
             public View getDropDownView(int position, View convertView, ViewGroup parent) {
                 TextView label = new TextView(getActivity());
-//        label.setTextColor(Color.BLACK);
+
                 label.setText(posttype.get(position));
                 label.setTextSize(24);
                 return label;
             }
         };
         mySpinner.setAdapter(adapter);
-
+        //! function on selecting type in dropdown list
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
+            //! function on selecting type of feed you want to browse(found/lost)
             public void onItemSelected(AdapterView<?> adapterView, View view,
                                        int position, long id) {
-                // Here you get the current item (a User object) that is selected by its position
+                //! Here you get the current item (a User object) that is selected by its position
                 FeedActivity.ptype = adapter.getItem(position);
                 // Here you can do the action you want to...
-
+                
+		//!display type
                 Toast.makeText(getActivity(), "\ntype: " + FeedActivity.ptype,
                         Toast.LENGTH_SHORT).show();
 
@@ -156,8 +166,9 @@ public class FeedFragment extends Fragment {
                                 JSONArray jsonArray = jsonRootObject.getJSONArray("postlist");
                                 //Iterate the jsonArray and print the info of JSONObjects
                                 for(int i=0; i < jsonArray.length(); i++){
+                                //!extracting information from database table 'post'
                                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-
+				    
                                     String title = jsonObject.optString("title").toString();
                                     String description = jsonObject.optString("description").toString();
                                     String categoryid = jsonObject.optString("cid").toString();
@@ -167,7 +178,7 @@ public class FeedFragment extends Fragment {
                                     String location = jsonObject.optString("location").toString();
                                     String postid = jsonObject.optString("post_id").toString();
                                     int count = Integer.parseInt(jsonObject.optString("count").toString());
-
+				    //!adding a new post in the 'feed' page	
                                     Posts posts = new Posts(postid,title,categoryid,date,description,emailid,location,time,count);
                                     p.add(posts);
 
