@@ -1,0 +1,16 @@
+var searchData=
+[
+  ['getcategory',['getCategory',['../classcom_1_1example_1_1sel_1_1lostfound_1_1Category.html#aad1c1ed95ef449791e1e27725ed60314',1,'com::example::sel::lostfound::Category']]],
+  ['getcategoryid',['getCategoryid',['../classcom_1_1example_1_1sel_1_1lostfound_1_1Posts.html#a16378dcdf5752029dd2b347640e08ad6',1,'com.example.sel.lostfound.Posts.getCategoryid()'],['../classcom_1_1example_1_1sel_1_1lostfound_1_1UserPost.html#ae3df884a795d2fea3730020c162acf8c',1,'com.example.sel.lostfound.UserPost.getCategoryid()']]],
+  ['getcid',['getCid',['../classcom_1_1example_1_1sel_1_1lostfound_1_1Category.html#a9394ecafd86528fa00554aecbc76ebdb',1,'com::example::sel::lostfound::Category']]],
+  ['getcount',['getCount',['../classcom_1_1example_1_1sel_1_1lostfound_1_1Posts.html#ab547a661789fd2b3b7ef0c8c2980de43',1,'com::example::sel::lostfound::Posts']]],
+  ['getdate',['getDate',['../classcom_1_1example_1_1sel_1_1lostfound_1_1Posts.html#a48289c70fa035673575e948b60fef456',1,'com.example.sel.lostfound.Posts.getDate()'],['../classcom_1_1example_1_1sel_1_1lostfound_1_1UserPost.html#a9699a5945d28663ac8d74c2b19baf8ea',1,'com.example.sel.lostfound.UserPost.getDate()']]],
+  ['getdescription',['getDescription',['../classcom_1_1example_1_1sel_1_1lostfound_1_1Posts.html#a29b12fbb98f54b0b154df4e671c0e322',1,'com.example.sel.lostfound.Posts.getDescription()'],['../classcom_1_1example_1_1sel_1_1lostfound_1_1UserPost.html#a1310c639b4bf549b804d5ac5f46ca571',1,'com.example.sel.lostfound.UserPost.getDescription()']]],
+  ['getemailid',['getEmailid',['../classcom_1_1example_1_1sel_1_1lostfound_1_1Posts.html#a5e2d129ec9e284266903f74ae62204f7',1,'com::example::sel::lostfound::Posts']]],
+  ['getlocation',['getLocation',['../classcom_1_1example_1_1sel_1_1lostfound_1_1Posts.html#a3ca78a6e83c54589f33938cc3ee6bb0b',1,'com.example.sel.lostfound.Posts.getLocation()'],['../classcom_1_1example_1_1sel_1_1lostfound_1_1UserPost.html#ac259d30c11ccbd238a146cac9d6272e7',1,'com.example.sel.lostfound.UserPost.getLocation()']]],
+  ['getpostid',['getPostid',['../classcom_1_1example_1_1sel_1_1lostfound_1_1Posts.html#ad3be37a34fadcbf1b1d27d58a689f88a',1,'com.example.sel.lostfound.Posts.getPostid()'],['../classcom_1_1example_1_1sel_1_1lostfound_1_1UserPost.html#a80475c33f4fb24120e5749b8d4eaa8cd',1,'com.example.sel.lostfound.UserPost.getPostid()']]],
+  ['getposttype',['getPosttype',['../classcom_1_1example_1_1sel_1_1lostfound_1_1UserPost.html#a8605b0fbdf58cd6805f0aaa0951da641',1,'com::example::sel::lostfound::UserPost']]],
+  ['gettime',['getTime',['../classcom_1_1example_1_1sel_1_1lostfound_1_1Posts.html#a25287d67ca688f18f480a66abeb83525',1,'com.example.sel.lostfound.Posts.getTime()'],['../classcom_1_1example_1_1sel_1_1lostfound_1_1UserPost.html#a77c13234097e4f44f6e0710c74987f87',1,'com.example.sel.lostfound.UserPost.getTime()']]],
+  ['gettitle',['getTitle',['../classcom_1_1example_1_1sel_1_1lostfound_1_1Posts.html#afc8f8e5a89b3da692a896055102c45c4',1,'com.example.sel.lostfound.Posts.getTitle()'],['../classcom_1_1example_1_1sel_1_1lostfound_1_1UserPost.html#a0d1d9e880acbaa4cfcc43dd22e215ec8',1,'com.example.sel.lostfound.UserPost.getTitle()']]],
+  ['getview',['getView',['../classcom_1_1example_1_1sel_1_1lostfound_1_1PostAdapter.html#aa2f3c1364857d97091ba325de3df6226',1,'com::example::sel::lostfound::PostAdapter']]]
+];
