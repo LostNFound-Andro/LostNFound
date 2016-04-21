@@ -25,9 +25,9 @@ import java.util.Map;
  * Created by Rohit G on 3/31/2016.
  */
 
-//!Backend Activity class
-/*!
-class implementing gmail authentication
+/** 
+ * \class Backend Activity class
+		\brief class implementing gmail authentication
 */
 public class BackendActivity extends AsyncTask<String,Void,String>{
     Context ctx; /*!< Context variable */
