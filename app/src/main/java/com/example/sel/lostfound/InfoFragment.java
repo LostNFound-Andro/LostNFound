@@ -22,7 +22,8 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
  /**
- * A class implementing Help and FAQ fragment of navigation bar
+  * \class InfoFragment
+ * 		\brief A class implementing Help and FAQ fragment of navigation bar
  **/
 public class InfoFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match

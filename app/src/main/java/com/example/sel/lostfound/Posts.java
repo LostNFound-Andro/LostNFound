@@ -1,7 +1,8 @@
 package com.example.sel.lostfound;
 
 /**
- * 
+ * 	\class Posts
+ * 	\brief contains postid,title,description,categoryid,eamilid,time,date,location,count variables and fuctions to set values to each variables and functions to abstract values from each variables.
  */
 public class Posts {
 

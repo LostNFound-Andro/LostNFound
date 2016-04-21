@@ -46,9 +46,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Rohit G on 4/2/2016.
- */
 
 
 /**
@@ -60,7 +57,8 @@ import java.util.Map;
  * create an instance of this fragment.
  */
 /**
-* class implementing post page
+ * \class PostFragment
+* 		\brief class implementing post page
 **/ 
 public class PostFragment extends Fragment {
 

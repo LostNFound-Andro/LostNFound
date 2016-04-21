@@ -26,9 +26,10 @@ import java.io.InputStream;
  * Created by Rohit G on 3/31/2016.
  */
 
-//! Feed Activity class
+
 /**
-* implementing navigation bar.
+ * \class FeedActivity
+* 		\brief implementing navigation bar.
 */
 public class FeedActivity extends AppCompatActivity
         implements ProfileFragment.OnFragmentInteractionListener,

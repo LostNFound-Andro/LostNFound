@@ -23,9 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by Rohit G on 4/2/2016.
- */
+
 
 
 /**
@@ -37,7 +35,8 @@ import java.util.List;
  * create an instance of this fragment.
  */
  /**
- * A class implementing fragment of feed when its clicked on navigation bar
+  * \class FeedFragment
+ *		\brief A class implementing fragment of feed when its clicked on navigation bar
  **/
 public class FeedFragment extends Fragment {
 

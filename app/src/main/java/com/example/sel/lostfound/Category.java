@@ -3,9 +3,10 @@ package com.example.sel.lostfound;
 /**
  * Created by achu on 12-04-2016.
  */
- //! Category class
-/*!
-class implementing categories
+ 
+/**
+ * \class Category
+*	\brief class implementing categories
 */
 public class Category {
     private String category;	/*! String variable category */

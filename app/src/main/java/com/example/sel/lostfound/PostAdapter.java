@@ -34,7 +34,8 @@ import java.util.Map;
  * Created by achu on 09-04-2016.
  */
  /**
- * A class implementing functions to get data from web server and implements report use-case
+ * \class PostAdapter
+ * \brief A class implementing functions to get data from web server and implements report use-case
  **/
 public class PostAdapter extends ArrayAdapter<Posts> {
 

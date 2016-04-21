@@ -29,13 +29,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by bablu on 4/14/2016.
+ * Displays posts abstracted from webserver database and implements resolve use case 
  */
+/**
+ * \class UserPostAdapter 
+ * 	\extends to ArrayAdapter<UserPost>
+ * 	\brief	Displays posts abstracted from webserver database and implements resolve use case 
+ */
+
+ 
 public class UserPostAdapter extends ArrayAdapter<UserPost>{
-
     List<UserPost> list;
+   
     Context context;
-
 
     public UserPostAdapter(Context context, int resource, List<UserPost> objects) {
         super(context, resource, objects);
@@ -80,16 +86,15 @@ public class UserPostAdapter extends ArrayAdapter<UserPost>{
             titleLabel.setText("Lost: ");
         }
 
-
             userPostHolder.tx_title.setText(userPost.getTitle());
         userPostHolder.tx_description.setText(userPost.getDescription());
         userPostHolder.tx_categoryid.setText(userPost.getCategoryid());
         userPostHolder.tx_time.setText(userPost.getTime());
         userPostHolder.tx_date.setText(userPost.getDate());
         userPostHolder.tx_location.setText(userPost.getLocation());
-
         Button resolve_button = (Button) row.findViewById(R.id.resolve_button);
         resolve_button.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View v) {
             new AlertDialog.Builder(context)
                     .setTitle("Resolve post")
@@ -189,4 +194,4 @@ public class UserPostAdapter extends ArrayAdapter<UserPost>{
     static class UserPostHolder{
         TextView tx_title,tx_description,tx_categoryid,tx_time,tx_date,tx_location ;
     }
-}
+}	

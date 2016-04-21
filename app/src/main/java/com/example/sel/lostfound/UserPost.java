@@ -6,50 +6,53 @@ package com.example.sel.lostfound;
 
 
 /**
-* \var private string  posttype
-*	\brief Type of the post.There are two post types : found post and lost post 
-*/
+ * \class UserPost
+ * 	\brief contains posttype,title,description,string,categoryid,postid,date,location variables and fuctions to set values to each variables and functions to abstract values from each variables.
+ * 	\package com.example.sel.lostfound
+ */
 
 public class UserPost {
-    private String posttype;
-
-
 /**
-* \var	private String title
+* \var posttype
+*	\brief Type of the post.There are two post types : found post and lost post 
+*/  
+    private String posttype;
+/**
+* \var title
 *	\brief variable for title of the post
 */
     private String title ;	
 
 /**
-* \var	private String description
+* \var description
 *	\brief	description of the post which gives information about post
 */  
   private String description;	 
 
 /**
-* \var	private String categoryid
+* \var categoryid
 *	\brief identifaction key for respective category of post
 */
     private String categoryid ;
 
 /**
-* \var	private String postid
+* \var postid
 *	\brief primary(identifaction) key for postid
 */
     private String postid ; 
 /**
-* \var	private String time
+* \var time
 *	\brief time of the lost/found post in format hh:mm
 */
     private String time ;
 
 /**
-* \var	private String date
+* \var date
 *	\brief date of post in format dd/mm/yy
 */ 
    private String date ;
 /**
-* \var	private String location
+* \var location
 *	\brief variable for location, provides where admin(person who posted the post) lost or found the object 
 */
     private String location ; 
@@ -79,14 +82,14 @@ public class UserPost {
     }
 
 /**
-* \fn  public String getPosttype() 
+* \fn public String getPosttype() 
 *	\brief returns post type
 */
     public String getPosttype() {
         return posttype;
     }
 /**
-* \fn 	public void setPosttype(String posttype)
+* \fn public void setPosttype(String posttype)
 *	\brief sets value of current class instance variable posttype to posttype
 */
     public void setPosttype(String posttype) {
@@ -100,7 +103,7 @@ public class UserPost {
         return title;
     }
 /**
-* \fn     public void setTitle(String title)
+* \fn public void setTitle(String title)
 *	\brief sets value of current class instance variable posttype to posttype
 */
     public void setTitle(String title) {
@@ -114,7 +117,7 @@ public class UserPost {
         return description;
     }
 /**
-* \fn  public void setDescription(String description)
+* \fn public void setDescription(String description)
 *	\brief sets value of current class instance variable description to description
 */
     public void setDescription(String description) {
@@ -128,7 +131,7 @@ public class UserPost {
         return categoryid;
     }
 /**
-* \fn 	public void setCategoryid(String categoryid)
+* \fn public void setCategoryid(String categoryid)
 *	\brief	sets value of current class instance variable categoryid to categoryid as in the argument
 */
     public void setCategoryid(String categoryid) {
@@ -163,7 +166,7 @@ public class UserPost {
         this.time = time;
     }
 /**
-* \fn  public String getDate()
+* \fn public String getDate()
 *	\brief returns value of lost/found date
 */
     public String getDate() {

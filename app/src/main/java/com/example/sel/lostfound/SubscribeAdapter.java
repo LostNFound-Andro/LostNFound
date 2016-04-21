@@ -27,20 +27,22 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by achu on 14-04-2016.
+ * \class SubscribeAdapter
+ * \extends	ArrayAdapter<Category>
+ *	\brief 	functions and variables to implement display of subscribed posts
  */
 public class SubscribeAdapter extends ArrayAdapter<Category> {
 
     List<Category> list;
     Context context;
-
     public SubscribeAdapter(Context context, int resource, List<Category> objects) {
         super(context, resource, objects);
-
         this.context =context;
         this.list = objects;
     }
-
+/**
+ *	\ 
+ */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -135,7 +137,9 @@ public class SubscribeAdapter extends ArrayAdapter<Category> {
 
         return row;
     }
-
+/**
+ *	\ 
+ */
     private String getQuery(ContentValues params) throws UnsupportedEncodingException
     {
         StringBuilder result = new StringBuilder();
@@ -155,7 +159,9 @@ public class SubscribeAdapter extends ArrayAdapter<Category> {
 
         return result.toString();
     }
-
+/**
+ *	\ 
+ */
     static class SubscribeHolder{
         TextView tx_cat ;
     }

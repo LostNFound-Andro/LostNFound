@@ -45,6 +45,12 @@ import java.util.Map;
  * Use the {@link SubscribeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+  
+/** \class  SubscribeFragment
+ * 	\extends Fragment
+ * 	\brief 	Manages subscription.implements subscribe/unsubscribe use case
+ */
+ 
 public class SubscribeFragment extends Fragment {
 
 
@@ -338,6 +344,11 @@ public class SubscribeFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
+ 
+ /**
+  * 	\interface OnFragmentInteractionListener
+  */
+ 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onSubscribeFragmentInteraction(String string);

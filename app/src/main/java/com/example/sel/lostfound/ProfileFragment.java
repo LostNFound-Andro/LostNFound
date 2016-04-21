@@ -23,19 +23,17 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Rohit G on 4/2/2016.
- */
 
 
+
+
+
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ProfileFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
+ *	\class ProfileFragment
+ * 	\extends Fragment
+ * 	\brief Displays Profile Page, profile information(name, email, profile picture) and posts managed by user
  */
+
 public class ProfileFragment extends Fragment {
 	String postAddress = "http://52.38.30.3/getprofilepost.php";
     UserPostAdapter userPostAdapter;
@@ -54,7 +52,9 @@ public class ProfileFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-
+/** \constructor
+ * 		\brief	Required empty public constructor
+ */
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -68,6 +68,11 @@ public class ProfileFragment extends Fragment {
      * @return A new instance of fragment ProfileFragment.
      */
     // TODO: Rename and change types and number of parameters
+   
+   /**
+ *	\ 
+ */
+   
     public static ProfileFragment newInstance(String param1, String param2) {
         ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();
@@ -77,6 +82,10 @@ public class ProfileFragment extends Fragment {
         return fragment;
     }
 
+ /**
+ *	\ 
+ */
+   
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +97,10 @@ public class ProfileFragment extends Fragment {
     }
 	
 	@Override
+   
+ /**
+ *	\ 
+ */  
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
@@ -151,6 +164,9 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
+  /**
+ *	\ 
+ */ 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -168,14 +184,18 @@ public class ProfileFragment extends Fragment {
         }
         return myFragmentView;
     }
-
+/**
+ *	\ 
+ */
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
     }
-
+/**
+ *	\ 
+ */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -188,6 +208,10 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
+/**
+ *	\ 
+ */
+
     public void onDetach() {
         super.onDetach();
         mListener = null;
@@ -209,7 +233,13 @@ public class ProfileFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 	
-	    private class DownloadImageTask extends AsyncTask<String,Void,Bitmap> {
+/**
+ * 	\class DownloadImageTask
+ *	\brief Downloads image from gmail account(profile picture)
+ * 	\extends  AsyncTask<String,Void,Bitmap>
+ * 	\exception printStackTrace
+ */
+ 	    private class DownloadImageTask extends AsyncTask<String,Void,Bitmap> {
         ImageView bmImage;
         public DownloadImageTask(ImageView bmImage) {
             this.bmImage = bmImage;
