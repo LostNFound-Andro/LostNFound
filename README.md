@@ -29,6 +29,12 @@ The app provides google sign in, post found items, browse feed at the moment. Fu
 
 ##INSTRUCTIONS FOR THE TEAM (Internal Documentation)
 
+
+####Instructions to run Doxygen
+* cd app/src/main/java/com/example/sel/lostfound/
+* doxygen DoxygenConfig
+* Output will be genrated inside Doxygen/Docs
+
 ####Please update your Android Studio to 2.0 to resolve any gradle conflicts.
 
 Once logged in the email is stored in userEmail variable which is static, which implies you can access logged in users email in any activity or fragment using 
