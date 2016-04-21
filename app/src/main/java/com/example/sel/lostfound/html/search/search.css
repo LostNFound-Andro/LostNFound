@@ -48,7 +48,11 @@
     height:19px;
     background:url('search_m.png') repeat-x;
     border:none;
+<<<<<<< HEAD
     width:111px;
+=======
+    width:116px;
+>>>>>>> 0bbb2bc5f31f033d772ef4573f66c50564006509
     margin-left:20px;
     padding-left:4px;
     color: #909090;
@@ -236,6 +240,7 @@ DIV.searchresults {
     margin-left: 10px;
     margin-right: 10px;
 }
+<<<<<<< HEAD
 
 /*---------------- External search page results */
 
@@ -269,3 +274,5 @@ DIV.searchresults {
     margin-top: 10px;
 }
 
+=======
+>>>>>>> 0bbb2bc5f31f033d772ef4573f66c50564006509

@@ -7,20 +7,30 @@
 
 var indexSectionsWithContent =
 {
+<<<<<<< HEAD
   0: "bcdfgijmnopstu",
   1: "bcfimopsu",
   2: "j",
   3: "cdginops",
   4: "dpt"
+=======
+  0: "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011001101000111100101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  1: "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011001001000101100101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  2: "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000010100101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+>>>>>>> 0bbb2bc5f31f033d772ef4573f66c50564006509
 };
 
 var indexSectionNames =
 {
   0: "all",
   1: "classes",
+<<<<<<< HEAD
   2: "namespaces",
   3: "functions",
   4: "variables"
+=======
+  2: "functions"
+>>>>>>> 0bbb2bc5f31f033d772ef4573f66c50564006509
 };
 
 function convertToId(search)
@@ -30,7 +40,11 @@ function convertToId(search)
   {
     var c = search.charAt(i);
     var cn = c.charCodeAt(0);
+<<<<<<< HEAD
     if (c.match(/[a-z0-9\u0080-\uFFFF]/))
+=======
+    if (c.match(/[a-z0-9]/))
+>>>>>>> 0bbb2bc5f31f033d772ef4573f66c50564006509
     {
       result+=c;
     }
@@ -335,20 +349,36 @@ function SearchBox(name, resultsPath, inFrame, label)
     var searchValue = this.DOMSearchField().value.replace(/^ +/, "");
 
     var code = searchValue.toLowerCase().charCodeAt(0);
+<<<<<<< HEAD
     var idxChar = searchValue.substr(0, 1).toLowerCase();
     if ( 0xD800 <= code && code <= 0xDBFF && searchValue > 1) // surrogate pair
     {
       idxChar = searchValue.substr(0, 2);
+=======
+    var hexCode;
+    if (code<16) 
+    {
+      hexCode="0"+code.toString(16);
+    }
+    else 
+    {
+      hexCode=code.toString(16);
+>>>>>>> 0bbb2bc5f31f033d772ef4573f66c50564006509
     }
 
     var resultsPage;
     var resultsPageWithSearch;
     var hasResultsPage;
 
+<<<<<<< HEAD
     var idx = indexSectionsWithContent[this.searchIndex].indexOf(idxChar);
     if (idx!=-1)
     {
        var hexCode=idx.toString(16);
+=======
+    if (indexSectionsWithContent[this.searchIndex].charAt(code) == '1')
+    {
+>>>>>>> 0bbb2bc5f31f033d772ef4573f66c50564006509
        resultsPage = this.resultsPath + '/' + indexSectionNames[this.searchIndex] + '_' + hexCode + '.html';
        resultsPageWithSearch = resultsPage+'?'+escape(searchValue);
        hasResultsPage = true;

@@ -1,4 +1,4 @@
-/* Anas M */
+
 package com.example.sel.lostfound;
 
 import java.io.BufferedInputStream;
@@ -18,16 +18,37 @@ import java.util.Map;
 import android.content.ContentValues;
 import android.os.AsyncTask;
 import android.util.Log;
-
+/**
+ *	Thie program connects android app to database to post the post 
+ */
 public class ScriptRunner extends AsyncTask<String, Void, String> {
-	
+/**
+ *  \var public static final int SUCCESS
+ * 		\brief static variable for success count.
+ */
 	public static final int SUCCESS = 0;
-	public static final int FAIL = 1;
+/**
+ *  \var public static final int FAIL
+ * 		\brief static variable for failure count.
+ */
 
+	public static final int FAIL = 1;
+/**
+ *  \var public static final String ENDPOINT
+ * 		\brief static variable for webserver address, where database is stored.
+ */
 	public static final String ENDPOINT = "http://52.38.30.3/";//addpost.php"
 	
 	private String objectString;
+/**
+ *  \var public boolean isDone
+ * 		\brief public variable to take if process is complete or not.
+ */	
 	private boolean isDone = false;
+/**
+ *  \var public int code.
+ * 		\brief 
+ */
 	private int code;
 	private ScriptFinishListener listener;
 	public ScriptRunner(ScriptFinishListener listener) {

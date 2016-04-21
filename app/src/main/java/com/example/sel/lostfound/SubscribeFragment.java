@@ -36,10 +36,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Rohit G on 4/2/2016.
- */
-
 
 /**
  * A simple {@link Fragment} subclass.
