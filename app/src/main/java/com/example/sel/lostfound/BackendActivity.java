@@ -42,9 +42,10 @@ public class BackendActivity extends AsyncTask<String,Void,String>{
     protected void onPreExecute() {
 
     }
-    //! function calling php file to check email
+    
     /**
-    *establishes connection with webserver and validates the email which has been input
+     * 	\fn  protected String doInBackground(String... params)
+    *	\brief function calling php file to check email .establishes connection with webserver and validates the email which has been input
     * @param params is a string parameter
     */
     @Override
@@ -97,7 +98,8 @@ public class BackendActivity extends AsyncTask<String,Void,String>{
         super.onProgressUpdate(values);
     }
     /**
-    * Toast display function when email has already been registered
+     * 	\fn  protected void onPostExecute(String result)
+     *  \brief display function when email has already been registered
     */
     @Override
     protected void onPostExecute(String result) {
@@ -107,7 +109,8 @@ public class BackendActivity extends AsyncTask<String,Void,String>{
         }
     }
     /**
-    * Function to send a request to web server
+     * \fn String getQuery(ContentValues params)
+    * 	\brief Function to send a request to web server
     */
     private String getQuery(ContentValues params) throws UnsupportedEncodingException
     {
