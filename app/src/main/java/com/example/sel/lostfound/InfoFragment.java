@@ -50,7 +50,10 @@ public class InfoFragment extends Fragment {
      * @return A new instance of fragment InfoFragment.
      */
     // TODO: Rename and change types and number of parameters
-    //! a constructor
+    /**
+    * \fn public static InfoFragment newInstance(String param1,String param2)
+    * \brief A constructor
+    **/
     public static InfoFragment newInstance(String param1, String param2) {
         InfoFragment fragment = new InfoFragment();
         Bundle args = new Bundle();
@@ -61,7 +64,10 @@ public class InfoFragment extends Fragment {
     }
 
     @Override
-    //! on opening or selecting info fragment from navigation bar
+    /**
+     * \fn public void onCreate(Bundle savedInstanceState)
+     * \brief on opening or selecting info fragment from navigation bar
+     **/
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((FeedActivity) getActivity()).getSupportActionBar().setTitle("Info"); /*!< Info action bar in navigation bar */
@@ -72,13 +78,18 @@ public class InfoFragment extends Fragment {
     }
 
     @Override
+    /**
+     * \fn public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+     **/
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_info, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+    /**
+     * \fn public void onButtonPressed(Uri uri)
+     **/
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -86,6 +97,9 @@ public class InfoFragment extends Fragment {
     }
 
     @Override
+    /**
+     * \fn public void onAttach(Context context)
+     **/
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
@@ -97,12 +111,16 @@ public class InfoFragment extends Fragment {
     }
 
     @Override
+    /**
+     * \fn public void onDetach()
+     **/
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
     /**
+     * \fn public interface OnFragmentInteractionListener
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
