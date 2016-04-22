@@ -30,23 +30,27 @@ import com.google.android.gms.common.api.Status;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
     EditText nitc_email;	/*!< variable storing NITC email*/
     String email;
-    Button proceedButton,continueButton,changeSignIn; /*!< variables defined as buttons */
+    Button proceedButton,continueButton,changeSignIn; /*! \var Button proceedButton,continueButton,changeSignIn
+                                                            \brief variables defined as buttons */
     com.google.android.gms.common.SignInButton signinButton;
-    TextView connectivityText; /*!< display connectivity message */
+    TextView connectivityText; /*! \var TextView connectivityText \brief display connectivity message */
 
-    private static final String TAG = "SignInActivity";
-    private static Intent CHK_SIGN_IN;
-    protected static String userName; 
-    protected static String userEmail;
-    protected static Uri userImage;
-    private static final int RC_SIGN_IN = 9001;
-    private static final String emailPattern = "[a-z]+(\\_?[a-z0-9]{9})@nitc.ac\\.in$";	/*!< pattern to check if @nitc.ac.in */
+    private static final String TAG = "SignInActivity"; /*! \var private static final String TAG */
+    private static Intent CHK_SIGN_IN; /* \var private static Intent CHK_SIGN_IN  */
+    protected static String userName; /* \var protected static String userName  */
+    protected static String userEmail; /* \var protected static String userName */
+    protected static Uri userImage; /* \var protected static Uri userImage */
+    private static final int RC_SIGN_IN = 9001; /* \var private static final int RC_SIGN_IN */
+    private static final String emailPattern = "[a-z]+(\\_?[a-z0-9]{9})@nitc.ac\\.in$";	/*! \var private static final String emailPattern \brief pattern to check if @nitc.ac.in */
 
 
-    private TextView mStatusTextView;
-    private GoogleApiClient mGoogleApiClient;
-    private boolean signedIn;
-    //! function to sign in via google
+    private TextView mStatusTextView; /* \var private TextView mStatusTextView */
+    private GoogleApiClient mGoogleApiClient; /* \var private GoogleApiClient mGoogleApiClient */
+    private boolean signedIn; /* \var private boolean signedIn */
+    /**
+     * \fn public void isSignedIn()
+     * \brief function to sign in via google
+     **/
     public void isSignedIn() {
         if (CHK_SIGN_IN != null) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(CHK_SIGN_IN);
@@ -63,7 +67,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     @Override
-    //! function implementing log in feature 
+    /**
+     * \fn protected void onCreate(Bundle savedInstanceState)
+     * \brief function implementing log in feature
+     **/
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -99,12 +106,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         isSignedIn();
 
     }
-    //! function to sign in into same account as previously signed in
+    /**
+     * \fn public  void continueSignIn(View view)
+     * \brief function to sign in into same account as previously signed in
+     **/
     public  void continueSignIn(View view){
         startActivity(new Intent(this,FeedActivity.class));
         finish();
     }
-    //! function to proceed login after validating the email id entered
+    /**
+     * \fn public void proceed(View view)
+     * \brief function to proceed login after validating the email id entered
+     **/
     public void proceed(View view) {
         email = nitc_email.getText().toString().trim();
         String method = "checkEmail";
@@ -122,6 +135,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     @Override
+    /**
+     * \fn public void onClick(View v)
+     **/
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.sign_in_button:
@@ -134,20 +150,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
-
+    /**
+     * \fn private void signIn()
+     **/
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     @Override
-    //! function on entering email id other than nitc email id
+    /**
+     * \fn public void onConnectionFailed(ConnectionResult connectionResult)
+     * \brief function on entering email id other than nitc email id
+     **/
     public void onConnectionFailed(ConnectionResult connectionResult) {
         Toast.makeText(this,"Please use nitc email id to continue.Fail",Toast.LENGTH_LONG).show();
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
     }
 
     @Override
+    /**
+     * \fn public void onActivityResult(int requestCode, int resultCode, Intent data)
+     * \brief Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...)
+     **/
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         CHK_SIGN_IN = data;
@@ -157,7 +182,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             handleSignInResult(result);
         }
     }
-    //! function after successful login
+    /**
+     * \fn private void handleSignInResult(GoogleSignInResult result)
+     * \brief function after successful login
+     **/
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
@@ -181,7 +209,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mStatusTextView.setText("Failed to sign in. Try again!");
         }
     }
-   //! function for sign out
+   /**
+    * \fn private void signOut()
+    * \brief function for sign out
+    **/
     private void signOut() {
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
@@ -197,7 +228,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 });
     }
-
+    /**
+     * \fn private void revokeAccess()
+     **/
     private void revokeAccess() {
         Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
