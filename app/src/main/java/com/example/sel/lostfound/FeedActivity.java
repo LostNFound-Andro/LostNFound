@@ -47,7 +47,8 @@ public class FeedActivity extends AppCompatActivity
     protected static String ptype = ""; /*!< variable of type string*/
 
     /**
-    * function defining actions done when the activity is started or created.
+     * \fn protected void onCreate(Bundle savedInstanceState)
+    *  \brief function defining actions done when the activity is started or created.
     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +89,8 @@ public class FeedActivity extends AppCompatActivity
 
     @Override
     /**
-    * function implementing actions when 'back' is pressed while navigation bar is open
+     *  \fn public void onBackPressed()
+    * 	\brief function implementing actions when 'back' is pressed while navigation bar is open
     */
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -101,7 +103,8 @@ public class FeedActivity extends AppCompatActivity
 
     @Override
     /**
-    * shows the options in the menu as result of opening the navigation bar
+     *  \fn public boolean onCreateOptionsMenu(Menu menu)
+     *  \brief shows the options in the menu as result of opening the navigation bar
     */
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -109,12 +112,14 @@ public class FeedActivity extends AppCompatActivity
         return true;
     }
 
-
+    /**
+     *  \fn public boolean onOptionsItemSelected(MenuItem item) 
+     *  \brief Handle action bar item clicks here. The action bar will automatically handle clicks on the Home/Up button
+    */
+	
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+       
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -127,7 +132,8 @@ public class FeedActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     /**
-    * function implementing actions on selecting a particular row in navigation bar.
+     * 	\fn  public boolean onNavigationItemSelected(MenuItem item)
+    * 	\brief function implementing actions on selecting a particular row in navigation bar.
     */
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
