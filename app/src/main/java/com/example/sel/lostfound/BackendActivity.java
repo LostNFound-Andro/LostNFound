@@ -27,7 +27,7 @@ import java.util.Map;
 
 /** 
  * \class Backend Activity class
-		\brief class implementing gmail authentication
+ * \brief Checks if the email id is Valid
 */
 public class BackendActivity extends AsyncTask<String,Void,String>{
     Context ctx; /*!< Context variable */
@@ -45,8 +45,6 @@ public class BackendActivity extends AsyncTask<String,Void,String>{
     
     /**
      * 	\fn  protected String doInBackground(String... params)
-    *	\brief function calling php file to check email .establishes connection with webserver and validates the email which has been input
-    * @param params is a string parameter
     */
     @Override
     protected String doInBackground(String... params) {
@@ -93,7 +91,9 @@ public class BackendActivity extends AsyncTask<String,Void,String>{
     }
 
     @Override
-    
+    /**
+     *  \fn protected void onProgressUpdate
+     **/
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);
     }
