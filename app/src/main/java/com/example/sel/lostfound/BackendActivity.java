@@ -93,7 +93,9 @@ public class BackendActivity extends AsyncTask<String,Void,String>{
     }
 
     @Override
-    
+    /**
+     *  \fn protected void onProgressUpdate
+     **/
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);
     }
