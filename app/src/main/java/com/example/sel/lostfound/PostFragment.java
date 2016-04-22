@@ -134,7 +134,9 @@ public class PostFragment extends Fragment {
     }
 
     @Override
-    //! function implementing task of extracting input by user into database
+    /** \fn public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
+     *  \brief function implementing task of extracting input by user into database
+     */
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -145,7 +147,7 @@ public class PostFragment extends Fragment {
                 .setPositiveButton("I've found an item", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        postType = "found"; /*!< postType contains decision by user if found or lost item to be posted */
+                        postType = "found"; /*!< \var postType \brief postType contains decision by user if found or lost item to be posted */
                         //! initialisation of the variables extracting the input
                         TextView titleCap = (TextView) myFragmentView.findViewById(R.id.titleCap);
                         txtTitle = (TextView) myFragmentView.findViewById(R.id.txtTitle);
@@ -223,7 +225,10 @@ public class PostFragment extends Fragment {
                         run.execute(postAddress);
                         dateCap.setVisibility(View.VISIBLE);
                         datePicker.setVisibility(View.VISIBLE);
-                        //! function to be executed on selecting a date via datepicker
+                        /**
+                         * \fn datePicker.setOnClickListener
+                         * \brief function to be executed on selecting a date via datepicker
+                         */
                         datePicker.setOnClickListener(new View.OnClickListener()
                         {
 
@@ -235,7 +240,9 @@ public class PostFragment extends Fragment {
                         });
                         timeCap.setVisibility(View.VISIBLE);
                         timePicker.setVisibility(View.VISIBLE);
-                        //! function to be executed on selecting a time via timepicker
+                        /** \fn timePicker.setOnClickListener
+                         * \brief function to be executed on selecting a time via timepicker
+                         */
                         timePicker.setOnClickListener(new View.OnClickListener()
                         {
 
@@ -247,7 +254,10 @@ public class PostFragment extends Fragment {
                         });
 
                         postButton.setVisibility(View.VISIBLE);
-                        //! functions to be executed on clicking post button
+                        /** 
+                         * \fn postButton.setOnClickListener
+                         * \brief functions to be executed on clicking post button
+                         */
                         postButton.setOnClickListener(new View.OnClickListener()
                         {
                             @Override
@@ -329,7 +339,9 @@ public class PostFragment extends Fragment {
                         });
                     }
                 })
-                //! posting lost item
+                /** \fn  public void onClick(DialogInterface dialog, int which)
+                 * \brief posting lost item
+                 */
                 .setNegativeButton("I've lost an item", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -438,6 +450,7 @@ public class PostFragment extends Fragment {
 
                         postButton.setVisibility(View.VISIBLE);
                         //@see postButton.setOnClickListener for 'found'
+                        
                         postButton.setOnClickListener(new View.OnClickListener()
                         {
                             @Override
@@ -540,7 +553,9 @@ public class PostFragment extends Fragment {
             timePicker.setText(time);
         }
     }
-   //! a class implementing date picker
+   /**	\class public static class DatePickerFragment
+   *    \brief a class implementing date picker
+   */
     public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
 
