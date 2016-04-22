@@ -39,10 +39,13 @@ import java.util.Map;
  **/
 public class PostAdapter extends ArrayAdapter<Posts> {
 
-    List<Posts> list;
-    Context context;
-    private String objectString;
-    //! a constructor
+    List<Posts> list; 
+    Context context; 
+    private String objectString; /*! \var private String objectString */
+    /**
+     * \fn public PostAdapter(Context context, int resource, List<Posts> posts)
+     * \brief a constructor
+     **/
     public PostAdapter(Context context, int resource, List<Posts> posts) {
         super(context, resource,posts);
         this.context =context;
@@ -51,7 +54,10 @@ public class PostAdapter extends ArrayAdapter<Posts> {
 
 
     @Override
-    //!  implementing list view of posts
+    /**
+     * \fn public View getView(int position, View convertView, ViewGroup parent)
+     * \brief implementing list view of posts and reporting
+     **/
     public View getView(int position, View convertView, ViewGroup parent) {
         
         View row;
@@ -169,7 +175,10 @@ public class PostAdapter extends ArrayAdapter<Posts> {
                                     }
 
                                     @Override
-                                    //! server response via OnPostExecute function
+                                    /**
+                                     * \fn protected void onPostExecute(String result)
+                                     * \brief server response via OnPostExecute function
+                                     **/
                                     protected void onPostExecute(String result) {
                                         try {
                                             JSONObject jsonObject = new JSONObject(result);
@@ -198,9 +207,10 @@ public class PostAdapter extends ArrayAdapter<Posts> {
 
         return row;
     }
-     /**
-    * Function to send a request to web server
-    */
+    /**
+    * \fn private String getQuery(ContentValues params)
+    * \brief Function to send a request to web server
+    **/
     private String getQuery(ContentValues params) throws UnsupportedEncodingException
     {
         StringBuilder result = new StringBuilder();
@@ -221,7 +231,8 @@ public class PostAdapter extends ArrayAdapter<Posts> {
         return result.toString();
     }
     /**
-    * class containing variables for list view
+    * \class static class PostHolder
+    * \brief class containing variables for list view
     **/
     static class PostHolder{
         TextView  tx_title,tx_description,tx_categoryid,tx_emailid,tx_time,tx_date,tx_location ;
