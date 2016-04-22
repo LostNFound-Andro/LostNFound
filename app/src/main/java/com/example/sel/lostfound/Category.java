@@ -12,24 +12,40 @@ public class Category {
     private String category;	/*! String variable category */
     private String cid;		/*! Category id */
 
-    //! A constructor with params category and cid
+    /**  \constructor public Category(String category, String cid)
+    *   \param category
+    *   \param cid
+    */
     public Category(String category, String cid) {
         this.category = category;	
         this.cid = cid;
     }
-   //! function to get category id
+    
+    
+   /**
+    * \fn public String getCid()
+    * \brief function to get category id
+    */ 
     public String getCid() {
         return cid;
     }
-   //! function to set category id
+   /**
+    * \fn public void setCid(String cid)
+    * \brief function to set category id
+    */
     public void setCid(String cid) {
         this.cid = cid;
     }
-   //! function to get category name
+   /** \fn public String getCategory()
+    *  \brief function to get category name
+    */
     public String getCategory() {
         return category;
     }
-  //! function to set category name
+  /** 
+   * \fn public void setCategory(String category)
+   *  \brief function to set category name
+   */
     public void setCategory(String category) {
         this.category = category;
     }
