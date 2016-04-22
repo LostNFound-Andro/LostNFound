@@ -27,7 +27,7 @@ import java.util.Map;
 
 /** 
  * \class Backend Activity class
-		\brief class implementing gmail authentication
+ * \brief class implementing gmail authentication
 */
 public class BackendActivity extends AsyncTask<String,Void,String>{
     Context ctx; /*!< Context variable */
