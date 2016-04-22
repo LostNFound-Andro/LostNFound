@@ -32,8 +32,8 @@ The app provides google sign in, post found items, browse feed at the moment. Fu
 
 ####Instructions to run Doxygen
 * cd app/src/main/java/com/example/sel/lostfound/
-* doxygen DoxygenConfig
-* Output will be genrated inside Doxygen/Docs
+* doxygen config-file
+* Output will be genrated inside Doxygen/Docs from the root directory.
 
 ####Please update your Android Studio to 2.0 to resolve any gradle conflicts.
 
