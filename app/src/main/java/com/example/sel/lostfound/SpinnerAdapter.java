@@ -12,7 +12,7 @@ import java.util.List;
  
 /** \class SpinnerAdapter  
  * 	\extends ArrayAdapter<Category>
- * 	\brief Displays Catogories in dropdown view
+ * 	\brief Displays Categories in dropdown view
  */
 public class SpinnerAdapter extends ArrayAdapter<Category> {
     private Context context;
