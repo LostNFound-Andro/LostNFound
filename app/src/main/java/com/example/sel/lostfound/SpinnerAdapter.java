@@ -55,7 +55,7 @@ public class SpinnerAdapter extends ArrayAdapter<Category> {
 
 /**
  *	\fn	public View getView(int position, View convertView, ViewGroup parent)
- * 	\brief displays categories 
+ * 	\brief displays categories in dropdown view
  */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -66,17 +66,4 @@ public class SpinnerAdapter extends ArrayAdapter<Category> {
         return label;
     }
 
-
-    @Override
-   /**
- *	\fn	public View getView(int position, View convertView, ViewGroup parent)
- * 	\brief gives dropdown view 
- */
-    public View getView(int position, View convertView, ViewGroup parent) {
-        TextView label = new TextView(context);
-//        label.setTextColor(Color.BLACK);
-        label.setText(list.get(position).getCategory());
-        label.setTextSize(24);
-        return label;
-    }
 }
