@@ -1,0 +1,68 @@
+Android application for Lost and Found.
+
+The app provides google sign in, post found items, browse feed at the moment. Further changes will be updated here.
+
+
+\begin{DoxyEnumerate}
+\item The app only allows nitc email id for login. User need not enter password, but has to be logged-\/in in his mobile using nitc-\/email id.
+\item A display picture, if there is any attached to the nitc gmail account, is shown in the navigation drawer.
+\item User is given following menu items to browse through
+
+$>$Profile
+
+$>$Feed
+
+$>$Post
+
+$>$Subscribe
+
+$>$Help \& F\+AQ
+\item User can subscribe/unsubscribe among the given categories.
+\item User can post a lost item, as of now, and browse them through the feed provided they have subscribed the category.
+\item User can contact the author of the post by clicking the contact button corresponding to it, which redirects the user to his gmail compose dialog box so that the user can send an email to the author.
+\item Sign out option is available, where user can chose to logout completely and login as a different user.
+\end{DoxyEnumerate}
+
+\subsection*{I\+N\+S\+T\+R\+U\+C\+T\+I\+O\+NS F\+OR T\+HE T\+E\+AM (Internal Documentation)}
+
+\paragraph*{Please update your Android Studio to 2.\+0 to resolve any gradle conflicts.}
+
+Once logged in the email is stored in user\+Email variable which is static, which implies you can access logged in users email in any activity or fragment using \begin{quote}
+Main\+Activity.\+user\+Name variable. \end{quote}
+
+
+To add any functionality, add it in the existing fragments.
+
+To add a new menu item (like Profile, Feed, Post, Subscribe etc) use the \begin{quote}
+res/menu/activity\+\_\+feed\+\_\+drawer.\+xml \end{quote}
+
+
+To access its layout properties from Fragment.\+java, use the following code\+: \begin{quote}
+my\+Fragment\+View = inflater.\+inflate(R.\+layout.\+fragment\+\_\+post, container, false); //example \end{quote}
+
+
+Instead of find\+View\+By\+Id directly, use my\+Fragment\+View.\+find\+View\+By\+Id (only in fragments).
+
+To use the context in any Fragment, use get\+Activity(); instead of this or Context context.
+
+To add a new instance/page/activity create a new blank fragment with factory methods, call backs and create layout checked.
+\begin{DoxyItemize}
+\item For this fragment to be triggered, create a menu item, and make necessary changes to the Feed\+Activity.\+java
+\end{DoxyItemize}
+
+Previous Browse.\+java and post\+Find.\+java Activities have been migrated to Feed\+Fragment.\+java and Post\+Fragment.\+java respectively.
+
+Main\+Activity, login\+Activity, sign\+Up\+Activity have no useful code, hence not included any where.
+
+\#\+Important
+
+This is the new default branch. To make any changes, create a new branch and do not pull or merge unless discussed.
+
+\#\+Note
+\begin{DoxyEnumerate}
+\item Implement classes as in the class diagram
+\item Database should be as in the ER diagram
+\item All the usecases in the usecase diagram should be implemented.
+\item Better user interface
+\item Internal and External documentation 
+\end{DoxyEnumerate}

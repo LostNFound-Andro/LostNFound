@@ -1,5 +1,10 @@
 \hypertarget{classcom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner}{}\section{com.\+example.\+sel.\+lostfound.\+Script\+Runner Class Reference}
 \label{classcom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner}\index{com.\+example.\+sel.\+lostfound.\+Script\+Runner@{com.\+example.\+sel.\+lostfound.\+Script\+Runner}}
+
+
+contains success and failure counts, webserver address, object string to store value of the post, isdone boolean to describe process status (complete/incomplete) also functions to copy database entries from the given query.  
+
+
 Inheritance diagram for com.\+example.\+sel.\+lostfound.\+Script\+Runner\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -9,17 +14,17 @@ Inheritance diagram for com.\+example.\+sel.\+lostfound.\+Script\+Runner\+:\begi
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-interface \hyperlink{interfacecom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner_1_1ScriptFinishListener}{Script\+Finish\+Listener}
-\end{DoxyCompactItemize}
+class \hyperlink{interfacecom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner_1_1ScriptFinishListener}{Script\+Finish\+Listener}
+\begin{DoxyCompactList}\small\item\em Displays success or failure in login. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 {\bfseries Script\+Runner} (\hyperlink{interfacecom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner_1_1ScriptFinishListener}{Script\+Finish\+Listener} listener)\hypertarget{classcom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner_a89fe364ebf708a526d2271b2aaad65dc}{}\label{classcom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner_a89fe364ebf708a526d2271b2aaad65dc}
 
 \item 
-boolean {\bfseries get\+Is\+Done} ()\hypertarget{classcom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner_a9f6500f6f9fda5c4230dbbba9724b8bd}{}\label{classcom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner_a9f6500f6f9fda5c4230dbbba9724b8bd}
+boolean \hyperlink{classcom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner_a72db96887ad239d9f2420814a19ef092}{get\+Is\+Done} ()\hypertarget{classcom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner_a72db96887ad239d9f2420814a19ef092}{}\label{classcom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner_a72db96887ad239d9f2420814a19ef092}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em checks process status \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -35,16 +40,61 @@ static final String \hyperlink{classcom_1_1example_1_1sel_1_1lostfound_1_1Script
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-String {\bfseries do\+In\+Background} (String...\+s)\hypertarget{classcom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner_a9050c944957b5b8fcacc9d2cba6f3b71}{}\label{classcom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner_a9050c944957b5b8fcacc9d2cba6f3b71}
-
-\item 
-void {\bfseries on\+Post\+Execute} (String result)\hypertarget{classcom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner_affce5629df2ecd60a45f3c707b996955}{}\label{classcom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner_affce5629df2ecd60a45f3c707b996955}
-
-\end{DoxyCompactItemize}
+String \hyperlink{classcom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner_aa1de0b3a2b48a27781b7d05b4aef1fb8}{do\+In\+Background} (String...\+s)
+\begin{DoxyCompactList}\small\item\em email validation is done. 
+\begin{DoxyExceptions}{Exceptions}
+{\em print\+Stack\+Trace$\ast$$\ast$} & \\
+\hline
+\end{DoxyExceptions}
+\end{DoxyCompactList}\item 
+void \hyperlink{classcom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner_a37f7dff1d92f0ca4b3b819e2f2f30742}{on\+Post\+Execute} (String result)
+\begin{DoxyCompactList}\small\item\em Checks if post is added. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-Thie program connects android app to database to post the post 
+contains success and failure counts, webserver address, object string to store value of the post, isdone boolean to describe process status (complete/incomplete) also functions to copy database entries from the given query. 
+
+Thie program connects android app to database to post the post. (post use case) $<$String, Void, String$>$ 
+
+\subsection{Member Function Documentation}
+\index{com\+::example\+::sel\+::lostfound\+::\+Script\+Runner@{com\+::example\+::sel\+::lostfound\+::\+Script\+Runner}!do\+In\+Background@{do\+In\+Background}}
+\index{do\+In\+Background@{do\+In\+Background}!com\+::example\+::sel\+::lostfound\+::\+Script\+Runner@{com\+::example\+::sel\+::lostfound\+::\+Script\+Runner}}
+\subsubsection[{\texorpdfstring{do\+In\+Background(\+String...\+s)}{doInBackground(String...s)}}]{\setlength{\rightskip}{0pt plus 5cm}protected String com.\+example.\+sel.\+lostfound.\+Script\+Runner.\+do\+In\+Background (
+\begin{DoxyParamCaption}
+\item[{String...}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\hypertarget{classcom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner_aa1de0b3a2b48a27781b7d05b4aef1fb8}{}\label{classcom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner_aa1de0b3a2b48a27781b7d05b4aef1fb8}
+
+
+email validation is done. 
+\begin{DoxyExceptions}{Exceptions}
+{\em print\+Stack\+Trace$\ast$$\ast$} & \\
+\hline
+\end{DoxyExceptions}
+
+
+\begin{DoxyReturn}{Returns}
+Object\+String 
+\end{DoxyReturn}
+\index{com\+::example\+::sel\+::lostfound\+::\+Script\+Runner@{com\+::example\+::sel\+::lostfound\+::\+Script\+Runner}!on\+Post\+Execute@{on\+Post\+Execute}}
+\index{on\+Post\+Execute@{on\+Post\+Execute}!com\+::example\+::sel\+::lostfound\+::\+Script\+Runner@{com\+::example\+::sel\+::lostfound\+::\+Script\+Runner}}
+\subsubsection[{\texorpdfstring{on\+Post\+Execute(\+String result)}{onPostExecute(String result)}}]{\setlength{\rightskip}{0pt plus 5cm}protected void com.\+example.\+sel.\+lostfound.\+Script\+Runner.\+on\+Post\+Execute (
+\begin{DoxyParamCaption}
+\item[{String}]{result}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\hypertarget{classcom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner_a37f7dff1d92f0ca4b3b819e2f2f30742}{}\label{classcom_1_1example_1_1sel_1_1lostfound_1_1ScriptRunner_a37f7dff1d92f0ca4b3b819e2f2f30742}
+
+
+Checks if post is added. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em result} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyVerb}    give result as fail.
+\end{DoxyVerb}
+
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
