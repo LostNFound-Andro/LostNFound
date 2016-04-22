@@ -44,9 +44,9 @@ public class FeedFragment extends Fragment {
     TextView itemListText; /*!<   */
     TextView jsonParsedOutput; /*!<   */
     PostAdapter postAdapter; /*!<   */
-    ListView listView; /*!< list view variable to display feeds in list form */
+    ListView listView; /*!< \var listView  \brief list view variable to display feeds in list form */
     ArrayAdapter<String> adapter; /*!<   */
-    private Spinner mySpinner; /*!< spinner variable for dropdown list implementation */
+    private Spinner mySpinner; /*!< \var mySpinner \brief spinner variable for dropdown list implementation */
 
 
     List<String> posttype = new ArrayList<>(Arrays.asList("lost", "found")); 
@@ -64,9 +64,14 @@ public class FeedFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private View myFragmentView;
+    
+   /** 
+    * \constuctor public FeedFragment()
+    *  \brief Required empty public constructor
+    */
 
     public FeedFragment() {
-        // Required empty public constructor
+        
     }
 
     /**
@@ -89,7 +94,9 @@ public class FeedFragment extends Fragment {
     }
 
     @Override
-    //! function on clicking 'Feed' on the navigation bar
+    /** \fn public void onCreate(Bundle savedInstanceState)
+     * \brief function on clicking 'Feed' on the navigation bar
+     */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((FeedActivity) getActivity()).getSupportActionBar().setTitle("Feed");
@@ -104,7 +111,9 @@ public class FeedFragment extends Fragment {
     }
 
     @Override
-    //! function on opening feed page
+    /** \fn public void onActivityCreated(Bundle savedInstanceState)
+     * \brief function on opening feed page
+     */
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
@@ -136,7 +145,9 @@ public class FeedFragment extends Fragment {
             }
         };
         mySpinner.setAdapter(adapter);
-        //! function on selecting type in dropdown list
+        /** \fn mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+         *  \brief function on selecting type in dropdown list
+         */
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
