@@ -24,8 +24,8 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
 /**
- * /class MainActivity
-* 		/brief implementing authentication of email id and log-in
+ * \class MainActivity
+* 		\brief implementing authentication of email id and log-in
 **/
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
     EditText nitc_email;	/*!< variable storing NITC email*/
